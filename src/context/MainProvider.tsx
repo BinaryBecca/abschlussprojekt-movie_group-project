@@ -1,5 +1,5 @@
 import React, { createContext, useMemo, useReducer, useState } from "react"
-import { getGenres, searchMovies } from "../api/Api"
+import { getGenres, getTrendingMoviesByGenres, searchMovies } from "../api/Api"
 import type { IState } from "../interfaces/ProviderInterfaces"
 import { initialState, reducer } from "../functions/Functions"
 import type { Result } from "../interfaces/ITrendingMovies"
@@ -13,6 +13,8 @@ export interface MainProviderProps extends IState {
 }
 
 export const mainContext = createContext<MainProviderProps | undefined>(undefined)
+
+
 
 export default function MainProvider({ children }: { children: React.ReactNode }) {
   const [states, dispatch] = useReducer(reducer, initialState)
@@ -32,6 +34,18 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       })
     }
   }
+
+    // ? Fetch Trending Movies
+  async function fetchTrendingMovies() {
+    dispatch({ type: "FETCH_START" })
+    try {
+      const data = await getTrendingMoviesByGenres()
+      dispatch({ type: "FETCH_TRENDING", payload: data.results ?? [] })
+    } catch (err: any) {
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: err?.message ?? "Fehler beim Laden der Genres",
+      })
 
   function setQuery(query: string) {
     dispatch({ type: "FETCH_QUERY", payload: query })
@@ -61,6 +75,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     () => ({
       ...states,
       fetchGenreNavBar,
+      fetchTrendingMovies,
       searchMovieByName,
       setQuery,
       setSearch,
