@@ -13,21 +13,21 @@ export interface Result {
   original_title: string
   overview: string
   poster_path: string
-  media_type: MediaType
-  original_language: OriginalLanguage
+  media_type: string
+  original_language: string
   genre_ids: number[]
   popularity: number
-  release_date: Date
+  release_date: string
   video: boolean
   vote_average: number
   vote_count: number
 }
 
-export enum MediaType {
-  Movie = "movie",
-}
+// export enum MediaType {
+//   Movie = "movie",
+// }
 
-export enum OriginalLanguage {
-  En = "en",
-  Ja = "ja",
-}
+// export enum OriginalLanguage {
+//   En = "en",
+//   Ja = "ja",
+// }
