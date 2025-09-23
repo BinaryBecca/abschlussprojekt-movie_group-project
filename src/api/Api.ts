@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import type { IGenres } from '../interfaces/IGenres'
+import type { ITrendingMovies } from '../interfaces/ITrendingMovies'
 
 const myAPI = import.meta.env.VITE_apiKey
 
@@ -11,4 +12,9 @@ export async function getGenres() {
   return data
 }
 
-export async function getTrendingMoviesByGenres() {}
+export async function getTrendingMoviesByGenres() {
+  const { data } = await api.get<ITrendingMovies>(
+    `https://api.themoviedb.org/3/trending/movie/day?${myAPI}`
+  )
+  return data
+}
