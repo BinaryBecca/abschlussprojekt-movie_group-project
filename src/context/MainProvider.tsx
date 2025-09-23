@@ -14,8 +14,6 @@ export interface MainProviderProps extends IState {
 
 export const mainContext = createContext<MainProviderProps | undefined>(undefined)
 
-
-
 export default function MainProvider({ children }: { children: React.ReactNode }) {
   const [states, dispatch] = useReducer(reducer, initialState)
   const [search, setSearch] = useState<string>("")
@@ -35,7 +33,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     }
   }
 
-    // ? Fetch Trending Movies
+  // ? Fetch Trending Movies
   async function fetchTrendingMovies() {
     dispatch({ type: "FETCH_START" })
     try {
@@ -46,6 +44,8 @@ export default function MainProvider({ children }: { children: React.ReactNode }
         type: "FETCH_ERROR",
         payload: err?.message ?? "Fehler beim Laden der Genres",
       })
+    }
+  }
 
   function setQuery(query: string) {
     dispatch({ type: "FETCH_QUERY", payload: query })
@@ -61,9 +61,9 @@ export default function MainProvider({ children }: { children: React.ReactNode }
         data.results?.map((movie: any) => ({
           poster_path: movie.poster_path,
           title: movie.title,
-          vote_avarage: movie.vote_avarage,
+          vote_average: movie.vote_average,
           release_date: movie.release_date,
-          genre_ids: movie.genre.ids,
+          genre_ids: movie.genre_ids,
         })) ?? []
       dispatch({ type: "FETCH_TRENDING", payload: slim })
     } catch (error: any) {

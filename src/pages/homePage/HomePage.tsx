@@ -1,5 +1,10 @@
 import React from "react"
+import SearchBar from "../../components/searchBar/SearchBar"
 
 export default function HomePage() {
-  return <div>HomePage</div>
+  return (
+    <div>
+      <SearchBar />
+    </div>
+  )
 }
