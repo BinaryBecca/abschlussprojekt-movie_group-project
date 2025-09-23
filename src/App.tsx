@@ -1,6 +1,6 @@
-import "./App.css"
+import './App.css'
 
-// const myAPI = import.meta.env.VITE_apiKey
+const myAPI = import.meta.env.VITE_apiKey
 
 function App() {
   return (
