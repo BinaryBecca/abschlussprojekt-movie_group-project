@@ -1,6 +1,7 @@
 import React, { createContext, useMemo, useReducer } from 'react'
 import { getGenres } from '../api/Api'
 import type { IState } from '../interfaces/ProviderInterfaces'
+import { initialState, reducer } from '../functions/Functions'
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
