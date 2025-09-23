@@ -6,12 +6,14 @@ import type { Result } from "../interfaces/ITrendingMovies"
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
+  fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
   setQuery: (query: string) => void
   setSearch: React.Dispatch<React.SetStateAction<string>>
   search: string
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const mainContext = createContext<MainProviderProps | undefined>(undefined)
 
 export default function MainProvider({ children }: { children: React.ReactNode }) {
