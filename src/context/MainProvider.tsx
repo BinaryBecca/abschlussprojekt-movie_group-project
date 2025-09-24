@@ -1,5 +1,10 @@
 import React, { createContext, useMemo, useReducer, useState } from 'react'
-import { getGenres, getTrendingMoviesByGenres, searchMovies } from '../api/Api'
+import {
+  getGenres,
+  filterTrendingMoviesByGenres,
+  searchMovies,
+  getTrendingMoviesByGenres,
+} from '../api/Api'
 import type { IState } from '../interfaces/ProviderInterfaces'
 import { initialState, reducer } from '../functions/Functions'
 import type { Result } from '../interfaces/ITrendingMovies'
@@ -47,7 +52,7 @@ export default function MainProvider({
     dispatch({ type: 'FETCH_START' })
     try {
       // ! getTrendingMoviesByGenres function stammt aus Api.ts
-      const data = await getTrendingMoviesByGenres(genreId)
+      const data = await filterTrendingMoviesByGenres(genreId)
 
       const filtered = data.results?.filter(
         (m) =>
