@@ -1,10 +1,10 @@
 import type { Result } from "../../interfaces/ITrendingMovies"
 
-interface MovieSliderCardProps {
+interface MovieCarouselCardProps {
   movie: Result
 }
 
-export default function MovieSliderCard({ movie }: MovieSliderCardProps) {
+export default function MovieCarouselCard({ movie }: MovieCarouselCardProps) {
   const IMG_URL = "https://image.tmdb.org/t/p/w500/"
   const backImg = IMG_URL + movie.backdrop_path
   // const frontImg = IMG_URL + movie.poster_path
@@ -13,7 +13,7 @@ export default function MovieSliderCard({ movie }: MovieSliderCardProps) {
 
   return (
     <div
-      className="relative flex items-center justify-center px-30 py-10 rounded-4xl bg-cover bg-center bg-no-repeat overflow-hidden "
+      className="relative flex items-center justify-center px-50 py-5 rounded-4xl bg-cover bg-center bg-no-repeat overflow-hidden "
       style={{ backgroundImage: `url(${backImg})` }}>
       <div className="absolute h-full w-full bg-black/30"></div>
       <div className="z-20 text-white text-2xl font-bold">
