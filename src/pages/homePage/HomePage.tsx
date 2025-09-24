@@ -12,6 +12,7 @@ export default function HomePage() {
 
   return (
     <>
+      <Header />
       <div>
         <MovieCarousel movies={trending} />
       </div>
