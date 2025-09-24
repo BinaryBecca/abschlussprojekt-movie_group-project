@@ -5,7 +5,7 @@ export default function Header() {
     <>
       <header>
         <section className="p-4">
-          <img src="../../../public/img/logo_mov.svg" alt=".mov Logo" className="w-12 m-auto" />
+          <img src="../../../public/img/logo_mov.svg" alt=".mov Logo" className="w-10 m-auto" />
         </section>
         <SearchBar />
       </header>
