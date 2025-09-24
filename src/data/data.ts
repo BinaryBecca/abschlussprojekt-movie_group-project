@@ -5,7 +5,7 @@ import type { ITrendingMovies } from "../interfaces/ITrendingMovies"
 export const trendingMovies: ITrendingMovies = {
   page: 1,
   total_pages: 10,
-  total_results: 300,
+  total_results: 10,
   results: [
     {
       adult: false,

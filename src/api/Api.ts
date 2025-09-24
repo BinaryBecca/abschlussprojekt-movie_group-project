@@ -1,20 +1,27 @@
 import axios from 'axios'
-import React from 'react'
 import type { IGenres } from '../interfaces/IGenres'
-import type { ITrendingMovies } from '../interfaces/ITrendingMovies'
+import type { ITrendingMovies, Result } from '../interfaces/ITrendingMovies'
 
 const myAPI = import.meta.env.VITE_apiKey
 
 export const api = axios.create({ baseURL: 'https://api.themoviedb.org/3' })
 
 export async function getGenres() {
-  const { data } = await api.get<IGenres>(`/genre/movie/list?api_key=${myAPI}`)
+  const { data } = await api.get<IGenres>('/genre/movie/list', {
+    params: { api_key: myAPI },
+  })
   return data
 }
 
-export async function getTrendingMoviesByGenres() {
-  const { data } = await api.get<ITrendingMovies>(
-    `https://api.themoviedb.org/3/trending/movie/day?${myAPI}`
-  )
+export async function getTrendingMoviesByGenres(gendreId: number) {
+  const { data } = await api.get<ITrendingMovies>(`/trending/movie/day`, {
+    params: { api_key: myAPI, with_genres: gendreId },
+  })
   return data
+}
+
+export async function searchMovies(name: string) {
+  const { data } = await api.get<ITrendingMovies>('/trending/movie/day/', {
+    params: { i: id },
+  })
 }

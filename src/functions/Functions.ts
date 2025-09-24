@@ -8,6 +8,12 @@ export default function useMovies() {
   return context
 }
 
+export const useGenres = () => {
+  const context = useContext(mainContext)
+  if (!context) throw new Error('Sorry, useContext is not working.')
+  return context
+}
+
 export const reducer = (state: IState, action: TAction): IState => {
   switch (action.type) {
     case 'FETCH_START':
@@ -18,6 +24,8 @@ export const reducer = (state: IState, action: TAction): IState => {
       return { ...state, loading: false, genres: action.payload }
     case 'FETCH_TRENDING':
       return { ...state, loading: false, trending: action.payload }
+    case 'FETCH_QUERY':
+      return { ...state, query: action.payload }
     // case "FETCH_DETAILS":
     //   return { ...state, loading: false, details: action.payloud }
     default:
@@ -30,5 +38,6 @@ export const initialState: IState = {
   error: null,
   genres: [],
   trending: [],
+  query: '',
   // details: []
 }
