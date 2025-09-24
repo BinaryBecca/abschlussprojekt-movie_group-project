@@ -1,5 +1,4 @@
 import axios from "axios"
-import React from "react"
 import type { IGenres } from "../interfaces/IGenres"
 import type { ITrendingMovies } from "../interfaces/ITrendingMovies"
 
@@ -18,8 +17,8 @@ export async function getTrendingMoviesByGenres() {
 }
 
 export async function searchMovies(name: string) {
-  const { data } = await api.get<ITrendingMovies>("/trending/movie/day/", {
-    params: { i: id },
+  const { data } = await api.get<ITrendingMovies>(`/search/movie?api_key=${myAPI}`, {
+    params: { query: name },
   })
   return data
 }
