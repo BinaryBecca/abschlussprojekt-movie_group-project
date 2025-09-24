@@ -16,7 +16,7 @@ function App() {
         <Route path="start" element={<StartPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="trending" element={<TrendingMoviesPage />} />
-        <Route path="genres" element={<GenresPage />} />
+        <Route path="genres/:genreId" element={<GenresPage />} />
         <Route path="details/:id" element={<DetailsPage />} />
       </Route>
     )
