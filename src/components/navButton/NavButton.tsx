@@ -12,7 +12,7 @@ export default function NavButton(props: NavButtonProps) {
   return (
     <>
       <NavLink to={props.link} className={props.className}>
-        <img src={props.img} alt={props.altText} />
+        {props.img ? <img src={props.img} alt={props.altText} /> : null}
         <p>{props.text}</p>
       </NavLink>
     </>
