@@ -5,11 +5,11 @@ import Loader from "../components/loader/Loader"
 import useMovies from "../functions/Functions"
 
 export default function Layout() {
-  const { loader } = useMovies()
+  // const { loader } = useMovies()
 
   return (
     <>
-      <div>
+      {/* <div>
         {loader ? (
           <Loader />
         ) : (
@@ -19,7 +19,13 @@ export default function Layout() {
             <Footer />
           </>
         )}
-      </div>
+      </div> */}
+
+      <>
+        <Header />
+        <Outlet />
+        <Footer />
+      </>
     </>
   )
 }
