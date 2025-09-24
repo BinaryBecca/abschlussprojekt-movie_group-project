@@ -1,10 +1,19 @@
 import axios from 'axios'
 import type { IGenres } from '../interfaces/IGenres'
 import type { ITrendingMovies } from '../interfaces/ITrendingMovies'
+import type { IMovieDetails } from '../interfaces/IMovieDetails'
 
 const myAPI = import.meta.env.VITE_apiKey
 
 export const api = axios.create({ baseURL: 'https://api.themoviedb.org/3' })
+
+export async function getDetailedMovie(id: number) {
+  const { data } = await api.get<IMovieDetails>(
+    `https://api.themoviedb.org/3/movie/${id}`,
+    { params: { api_key: myAPI } }
+  )
+  return data
+}
 
 export async function getGenres() {
   const { data } = await api.get<IGenres>('/genre/movie/list', {

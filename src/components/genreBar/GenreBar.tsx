@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router'
-import { useGenres } from '../../functions/Functions'
+import useMovies from '../../functions/Functions'
 
 export default function GenreBar() {
-  const { name } = useParams<{ name: string }>()
-  const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useGenres()
+  const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()
 
   // ! Genres laden nur einmal (wenn noch keine da sind)
   useEffect(() => {

@@ -4,6 +4,7 @@ import {
   filterTrendingMoviesByGenres,
   searchMovies,
   getTrendingMoviesByGenres,
+  getDetailedMovie,
 } from '../api/Api'
 import type { IState } from '../interfaces/ProviderInterfaces'
 import { initialState, reducer } from '../functions/Functions'
@@ -12,6 +13,7 @@ import type { Result } from '../interfaces/ITrendingMovies'
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
+  fetchDetailedMovie: (id: number) => Promise<void>
   fetchGenreByTrend: (genreId: number) => Promise<void>
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
@@ -45,6 +47,19 @@ export default function MainProvider({
       dispatch({
         type: 'FETCH_ERROR',
         payload: err?.message ?? 'Fehler beim Laden der Genres',
+      })
+    }
+  }
+
+  async function fetchDetailedMovie(id: number) {
+    dispatch({ type: 'FETCH_START' })
+    try {
+      const data = await getDetailedMovie(id)
+      dispatch({ type: 'FETCH_DETAILS', payload: data })
+    } catch (err: any) {
+      dispatch({
+        type: 'FETCH_ERROR',
+        payload: err?.message ?? 'Fehler beim Laden der Details',
       })
     }
   }
@@ -128,6 +143,7 @@ export default function MainProvider({
       fetchGenreNavBar,
       searchMovieByName,
       setQuery,
+      fetchDetailedMovie,
       fetchTrendingMovies,
       setSearch,
       fetchGenreByTrend,
