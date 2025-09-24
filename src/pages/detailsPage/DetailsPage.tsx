@@ -14,13 +14,13 @@ export default function DetailsPage() {
   if (error) return <div>{error}</div>
   if (!details) return <div>Keine Details gefunden.</div>
 
-  const IMG = details.poster_path
-    ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
-    : '/img/placeholder.jpg'
-
   return (
     <article className="p-4 grid gap-4 md:grid-cols-[200px,1fr]">
-      <img src={IMG} alt={details.title} className="w-48 rounded" />
+      <img
+        src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
+        alt={details.title}
+        className="w-48 rounded"
+      />
       <div>
         <h1 className="text-2xl font-bold">{details.title}</h1>
         {details.tagline && (
