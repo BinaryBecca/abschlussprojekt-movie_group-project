@@ -98,7 +98,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
           // const IMG_URL = "https://image.tmdb.org/t/p/w500/"
           // const frontImg = IMG_URL + movie.poster_path
         })) ?? []
-      dispatch({ type: "FETCH_TRENDING", payload: slim })
+      dispatch({ type: "FETCH_SEARCHRESULTS", payload: slim })
       console.log(slim)
     } catch (error: any) {
       dispatch({

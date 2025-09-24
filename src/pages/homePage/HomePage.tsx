@@ -2,20 +2,21 @@ import React, { useEffect } from "react"
 import useMovies from "../../functions/Functions"
 import Header from "../../components/header/Header"
 import MovieCarousel from "../../components/movieCarousel/MovieCarousel"
+import SearchResults from "../../components/searchResults/SearchResults"
 
 export default function HomePage() {
-  const { fetchTrendingMovies, trending } = useMovies()
+  const { fetchTrendingMovies, trending, query, searchResults } = useMovies()
 
   useEffect(() => {
     fetchTrendingMovies()
   }, [])
 
+  const searchInput = query.trim().length > 0
+
   return (
     <>
-      <Header />
-      <div>
-        <MovieCarousel movies={trending} />
-      </div>
+      <div>{searchInput ? <SearchResults results={searchResults} /> : <MovieCarousel movies={trending} />}</div>
+      {/* <div>{query.trim() === "" && <MovieCarousel movies={trending} />}</div> */}
     </>
   )
 }
