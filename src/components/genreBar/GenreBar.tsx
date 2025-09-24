@@ -1,11 +1,8 @@
-import React, { useEffect } from "react"
-import { useParams } from "react-router"
-import { useGenres } from "../../functions/Functions"
-import MovieButton from "../movieButton/MovieButton"
+import React, { useEffect } from 'react'
+import useMovies from '../../functions/Functions'
 
 export default function GenreBar() {
-  const { genreId } = useParams<{ genreId: string }>()
-  const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useGenres()
+  const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()
 
   // ! Genres laden nur einmal (wenn noch keine da sind)
   useEffect(() => {
@@ -14,15 +11,14 @@ export default function GenreBar() {
 
   if (loading && genres.length === 0) return <div>Lade Genres...</div>
 
-  useEffect(() => {
-    if (!genreId) return
-    void fetchGenreByTrend(Number(genreId))
-  }, [genreId])
-
   return (
     <div>
       {genres.map((g) => (
-        <button key={g.id} onClick={() => fetchGenreByTrend(g.id)} title={g.name}>
+        <button
+          key={g.id}
+          onClick={() => fetchGenreByTrend(g.id)}
+          title={g.name}
+        >
           {g.name}
         </button>
 

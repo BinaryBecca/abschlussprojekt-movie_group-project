@@ -1,7 +1,6 @@
-import React, { useEffect } from "react"
-import useMovies from "../../functions/Functions"
-import Header from "../../components/header/Header"
-import MovieCarousel from "../../components/movieCarousel/MovieCarousel"
+import React, { useEffect } from 'react'
+import useMovies from '../../functions/Functions'
+import MovieCarousel from '../../components/movieCarousel/MovieCarousel'
 
 export default function HomePage() {
   const { fetchTrendingMovies, trending } = useMovies()
@@ -12,7 +11,6 @@ export default function HomePage() {
 
   return (
     <>
-      <Header />
       <div>
         <MovieCarousel movies={trending} />
       </div>
