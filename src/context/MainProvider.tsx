@@ -179,7 +179,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       loader,
       displayScreen,
     }),
-    [states, search, loader]
+    [states, search, loader, displayScreen]
   )
 
   return <mainContext.Provider value={value}>{children}</mainContext.Provider>
