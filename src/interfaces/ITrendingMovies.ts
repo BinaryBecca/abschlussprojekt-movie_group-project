@@ -6,9 +6,9 @@ export interface ITrendingMovies {
 }
 
 export interface Result {
-  adult: boolean
+  adult?: boolean
   backdrop_path?: string
-  id: number
+  id?: number
   title: string
   original_title?: string
   overview?: string
