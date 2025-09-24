@@ -16,7 +16,6 @@ export default function HomePage() {
   return (
     <>
       <div>{searchInput ? <SearchResults results={searchResults} /> : <MovieCarousel movies={trending} />}</div>
-      {/* <div>{query.trim() === "" && <MovieCarousel movies={trending} />}</div> */}
     </>
   )
 }
