@@ -13,12 +13,12 @@ export default function MovieCarouselCard({ movie }: MovieCarouselCardProps) {
 
   return (
     <div
-      className="relative flex items-center justify-center px-50 py-5 rounded-4xl bg-cover bg-center bg-no-repeat overflow-hidden "
+      className="relative flex items-center justify-center py-30 rounded-4xl bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{ backgroundImage: `url(${backImg})` }}>
       <div className="absolute h-full w-full bg-black/30"></div>
-      <div className="z-20 text-white text-2xl font-bold">
-        <h4>{movie.title}</h4>
-        <p>⭐ {roundedVoteAverage}/ 10.0</p>
+      <div className="absolute bottom-1.5 justify-center z-20 text-white text-center">
+        <h4 className="text-2xl font-bold">{movie.title}</h4>
+        <p className="font-light">⭐ {roundedVoteAverage}/ 10.0</p>
       </div>
     </div>
   )

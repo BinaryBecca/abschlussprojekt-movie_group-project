@@ -16,15 +16,19 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
   }
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      {movies.map((movie) => {
-        return (
-          <Carousel.Item key={movie.id}>
-            <MovieCarouselCard movie={movie} />
-          </Carousel.Item>
-        )
-      })}
-    </Carousel>
-    // <div className="flex flex-row gap-5 p-5"></div>
+    <>
+      <div>
+        <h5>Trending Movies</h5>
+      </div>
+      <Carousel activeIndex={index} onSelect={handleSelect} className="px-10 py-5">
+        {movies.map((movie) => {
+          return (
+            <Carousel.Item key={movie.id}>
+              <MovieCarouselCard movie={movie} />
+            </Carousel.Item>
+          )
+        })}
+      </Carousel>
+    </>
   )
 }
