@@ -1,5 +1,11 @@
-import React, { createContext, useMemo, useReducer, useState } from "react"
-import { getGenres, filterTrendingMoviesByGenres, searchMovies, getTrendingMoviesByGenres } from "../api/Api"
+import React, { createContext, useEffect, useMemo, useReducer, useState } from "react"
+import {
+  getGenres,
+  filterTrendingMoviesByGenres,
+  searchMovies,
+  getTrendingMoviesByGenres,
+  getDetailedMovie,
+} from "../api/Api"
 import type { IState } from "../interfaces/ProviderInterfaces"
 import { initialState, reducer } from "../functions/Functions"
 import type { Result } from "../interfaces/ITrendingMovies"
@@ -7,12 +13,14 @@ import type { Result } from "../interfaces/ITrendingMovies"
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
+  fetchDetailedMovie: (id: number) => Promise<void>
   fetchGenreByTrend: (genreId: number) => Promise<void>
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
   setQuery: (query: string) => void
   setSearch: React.Dispatch<React.SetStateAction<string>>
   search: string
+  loader: boolean
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -21,6 +29,7 @@ export const mainContext = createContext<MainProviderProps | undefined>(undefine
 export default function MainProvider({ children }: { children: React.ReactNode }) {
   const [states, dispatch] = useReducer(reducer, initialState)
   const [search, setSearch] = useState<string>("")
+  const [loader, setLoader] = useState<boolean>(true)
 
   // ? Fetch Genre NavBar
   async function fetchGenreNavBar() {
@@ -34,6 +43,19 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       dispatch({
         type: "FETCH_ERROR",
         payload: err?.message ?? "Fehler beim Laden der Genres",
+      })
+    }
+  }
+
+  async function fetchDetailedMovie(id: number) {
+    dispatch({ type: "FETCH_START" })
+    try {
+      const data = await getDetailedMovie(id)
+      dispatch({ type: "FETCH_DETAILS", payload: data })
+    } catch (err: any) {
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: err?.message ?? "Fehler beim Laden der Details",
       })
     }
   }
@@ -108,18 +130,30 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     }
   }
 
+  // ? Startscreen Loading Simluation
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoader(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   const value = useMemo<MainProviderProps>(
     () => ({
       ...states,
       fetchGenreNavBar,
       searchMovieByName,
       setQuery,
+      fetchDetailedMovie,
       fetchTrendingMovies,
       setSearch,
       fetchGenreByTrend,
       search,
+      loader,
     }),
-    [states, search]
+    [states, search, loader]
   )
 
   return <mainContext.Provider value={value}>{children}</mainContext.Provider>

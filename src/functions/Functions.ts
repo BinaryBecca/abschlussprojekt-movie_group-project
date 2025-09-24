@@ -16,6 +16,8 @@ export const useGenres = () => {
 
 export const reducer = (state: IState, action: TAction): IState => {
   switch (action.type) {
+    case "START_LOADING":
+      return { ...state, loading: true, error: null }
     case "FETCH_START":
       return { ...state, loading: true, error: null }
     case "FETCH_ERROR":
@@ -24,6 +26,8 @@ export const reducer = (state: IState, action: TAction): IState => {
       return { ...state, loading: false, genres: action.payload }
     case "FETCH_TRENDING":
       return { ...state, loading: false, trending: action.payload }
+    case "FETCH_DETAILS":
+      return { ...state, loading: false, details: action.payload }
     case "FETCH_SEARCHRESULTS":
       return { ...state, loading: false, searchResults: action.payload }
     case "FETCH_QUERY":
@@ -39,6 +43,7 @@ export const initialState: IState = {
   loading: false,
   error: null,
   genres: [],
+  details: null,
   trending: [],
   query: "",
   searchResults: [],
