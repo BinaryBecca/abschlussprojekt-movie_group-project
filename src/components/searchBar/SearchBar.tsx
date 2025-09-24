@@ -18,14 +18,17 @@ export default function SearchBar() {
 
   return (
     <>
-      <div>
+      <div className="flex gap-4">
         <input
           type="text"
           placeholder="Search Movie…"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
+          className="bg-[#E7EFED] rounded-2xl p-3 w-full"
         />
-        <button type="button" onClick={handleSearch}></button>
+        <button type="button" onClick={handleSearch}>
+          <img src="../../../public/img/icon_search.png" alt="" className="w-8" />
+        </button>
       </div>
     </>
   )

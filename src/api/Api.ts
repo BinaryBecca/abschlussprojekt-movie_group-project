@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { IGenres } from '../interfaces/IGenres'
-import type { ITrendingMovies, Result } from '../interfaces/ITrendingMovies'
+import type { ITrendingMovies } from '../interfaces/ITrendingMovies'
 
 const myAPI = import.meta.env.VITE_apiKey
 
@@ -28,7 +28,11 @@ export async function getTrendingMoviesByGenres() {
 }
 
 export async function searchMovies(name: string) {
-  const { data } = await api.get<ITrendingMovies>('/trending/movie/day/', {
-    params: { i: id },
-  })
+  const { data } = await api.get<ITrendingMovies>(
+    `/search/movie?api_key=${myAPI}`,
+    {
+      params: { query: name },
+    }
+  )
+  return data
 }

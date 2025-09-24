@@ -8,6 +8,7 @@ import {
 import type { IState } from '../interfaces/ProviderInterfaces'
 import { initialState, reducer } from '../functions/Functions'
 import type { Result } from '../interfaces/ITrendingMovies'
+// TODO Infos in Component MovieCard umlagern
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
@@ -99,8 +100,20 @@ export default function MainProvider({
           vote_average: movie.vote_average,
           release_date: movie.release_date,
           genre_ids: movie.genre_ids,
+
+          // ! In MovieCard umlagern
+          // <div>
+          //   <img src={movie.poster_path} alt={movie.title} />
+          //   <h3>{movie.title}</h3>
+          //   <p>{movie.vote_average}</p>
+          //   <p>{movie.release_date}</p>
+          //   <p>{movie.genre_ids[0]}</p>
+          // </div>
+          // const IMG_URL = "https://image.tmdb.org/t/p/w500/"
+          // const frontImg = IMG_URL + movie.poster_path
         })) ?? []
       dispatch({ type: 'FETCH_TRENDING', payload: slim })
+      console.log(slim)
     } catch (error: any) {
       dispatch({
         type: 'FETCH_ERROR',

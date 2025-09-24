@@ -1,10 +1,14 @@
-import React from 'react'
+import SearchBar from '../searchBar/SearchBar'
 import GenreBar from '../genreBar/GenreBar'
 
 export default function Header() {
   return (
-    <div>
-      <GenreBar />
-    </div>
+    <>
+      <header>
+        <section></section>
+        <SearchBar />
+        <GenreBar />
+      </header>
+    </>
   )
 }
