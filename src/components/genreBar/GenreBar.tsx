@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import useMovies from '../../functions/Functions'
-import MovieButton from '../movieButton/MovieButton'
+import { useEffect } from "react"
+import useMovies from "../../functions/Functions"
+import MovieButton from "../movieButton/MovieButton"
 
 export default function GenreBar() {
   const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()

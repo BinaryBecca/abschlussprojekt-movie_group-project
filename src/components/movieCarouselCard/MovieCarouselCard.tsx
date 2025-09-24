@@ -1,6 +1,5 @@
 import { Link } from "react-router"
 import type { Result } from "../../interfaces/ITrendingMovies"
-import { Carousel } from "react-bootstrap"
 
 interface MovieCarouselCardProps {
   movie: Result
