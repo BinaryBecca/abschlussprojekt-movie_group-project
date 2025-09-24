@@ -3,6 +3,19 @@ import useMovies from "../../functions/Functions"
 export default function SearchBar() {
   const { searchMovieByName, query, setQuery } = useMovies()
 
+  const handleSearch = () => {
+    const q = query.trim()
+    if (q.length === 0) {
+      return (
+        <div>
+          <p>Sorry, no matching movie found.</p>
+        </div>
+      )
+    }
+    searchMovieByName(q)
+    console.log(q)
+  }
+
   return (
     <>
       <div>
@@ -12,7 +25,7 @@ export default function SearchBar() {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <button></button>
+        <button type="button" onClick={handleSearch}></button>
       </div>
     </>
   )
