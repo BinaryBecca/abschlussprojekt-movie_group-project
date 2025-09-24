@@ -13,7 +13,7 @@ export default function Footer() {
           classNameImg="h-8"
           className="flex items-center justify-center gap-2"
         />
-        <NavButton link="/favorites" img="../../../public/img/icon_favorites.svg" className="" classNameImg="h-8" />
+        <NavButton link="/favorites" img="/icon_download.svg" className="" classNameImg="h-8" />
         <NavButton link="/download" img="../../../public/img/icon_download.svg" className="" classNameImg="h-8" />
         <NavButton link="/profile" img="../../../public/img/icon_profile.svg" className="" classNameImg="h-8" />
       </nav>
