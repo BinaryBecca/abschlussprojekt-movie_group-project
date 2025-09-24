@@ -10,6 +10,7 @@ import {
 import type { IState } from "../interfaces/ProviderInterfaces"
 import { initialState, reducer } from "../functions/Functions"
 import type { Result } from "../interfaces/ITrendingMovies"
+
 // TODO Infos in Component MovieCard umlagern
 
 export interface MainProviderProps extends IState {
@@ -21,8 +22,10 @@ export interface MainProviderProps extends IState {
   setQuery: (query: string) => void
   fetchMovieVideos: (id: number) => Promise<void>
   setSearch: React.Dispatch<React.SetStateAction<string>>
+  setDisplayScreen: React.Dispatch<React.SetStateAction<string>>
   search: string
   loader: boolean
+  displayScreen: string
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -32,6 +35,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
   const [states, dispatch] = useReducer(reducer, initialState)
   const [search, setSearch] = useState<string>("")
   const [loader, setLoader] = useState<boolean>(true)
+  const [displayScreen, setDisplayScreen] = useState("loading")
 
   // ? Fetch Genre NavBar
   async function fetchGenreNavBar() {
@@ -146,15 +150,18 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     }
   }
 
-  // ? Startscreen Loading Simluation
+  // ? Loading- und Startscreen rendern
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoader(false)
+      setDisplayScreen("start")
+      // setLoader(false)
     }, 3000)
 
     return () => clearTimeout(timer)
   }, [])
+
+  console.log(displayScreen)
 
   const value = useMemo<MainProviderProps>(
     () => ({
@@ -166,9 +173,11 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       fetchTrendingMovies,
       setSearch,
       fetchGenreByTrend,
+      setDisplayScreen,
       fetchMovieVideos,
       search,
       loader,
+      displayScreen,
     }),
     [states, search, loader]
   )
