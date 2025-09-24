@@ -5,6 +5,7 @@ import {
   searchMovies,
   getTrendingMoviesByGenres,
   getDetailedMovie,
+  getMovieVideos,
 } from '../api/Api'
 import type { IState } from '../interfaces/ProviderInterfaces'
 import { initialState, reducer } from '../functions/Functions'
@@ -18,6 +19,7 @@ export interface MainProviderProps extends IState {
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
   setQuery: (query: string) => void
+  fetchMovieVideos: (id: number) => Promise<void>
   setSearch: React.Dispatch<React.SetStateAction<string>>
   search: string
 }
@@ -47,6 +49,20 @@ export default function MainProvider({
       dispatch({
         type: 'FETCH_ERROR',
         payload: err?.message ?? 'Fehler beim Laden der Genres',
+      })
+    }
+  }
+
+  // ? Fetch Movie Videos
+  async function fetchMovieVideos(id: number) {
+    dispatch({ type: 'FETCH_START' })
+    try {
+      const videos = await getMovieVideos(id)
+      dispatch({ type: 'FETCH_VIDEOS', payload: videos })
+    } catch (err: any) {
+      dispatch({
+        type: 'FETCH_ERROR',
+        payload: err.message ?? 'Fehler beim Laden der Videos',
       })
     }
   }
@@ -147,6 +163,7 @@ export default function MainProvider({
       fetchTrendingMovies,
       setSearch,
       fetchGenreByTrend,
+      fetchMovieVideos,
       search,
     }),
     [states, search]

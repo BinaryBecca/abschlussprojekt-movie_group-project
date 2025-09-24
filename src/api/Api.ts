@@ -2,6 +2,7 @@ import axios from 'axios'
 import type { IGenres } from '../interfaces/IGenres'
 import type { ITrendingMovies } from '../interfaces/ITrendingMovies'
 import type { IMovieDetails } from '../interfaces/IMovieDetails'
+import type { IVideo } from '../interfaces/IVideo'
 
 const myAPI = import.meta.env.VITE_apiKey
 
@@ -34,6 +35,13 @@ export async function getTrendingMoviesByGenres() {
     `/trending/movie/day?api_key=${myAPI}`
   )
   return data
+}
+
+export async function getMovieVideos(id: number) {
+  const { data } = await api.get(`/movie/${id}/videos`, {
+    params: { api_key: myAPI, language: 'en-us' },
+  })
+  return data.results as IVideo[]
 }
 
 export async function searchMovies(name: string) {

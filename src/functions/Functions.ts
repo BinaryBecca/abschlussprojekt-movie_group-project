@@ -20,6 +20,8 @@ export const reducer = (state: IState, action: TAction): IState => {
       return { ...state, loading: false, trending: action.payload }
     case 'FETCH_DETAILS':
       return { ...state, loading: false, details: action.payload }
+    case 'FETCH_VIDEOS':
+      return { ...state, loading: false, videos: action.payload }
     case 'FETCH_QUERY':
       return { ...state, query: action.payload }
     // case "FETCH_DETAILS":
@@ -36,5 +38,6 @@ export const initialState: IState = {
   details: null,
   trending: [],
   query: '',
+  videos: [],
   // details: []
 }
