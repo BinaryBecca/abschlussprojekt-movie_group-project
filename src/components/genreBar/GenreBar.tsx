@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import useMovies from '../../functions/Functions'
+import MovieButton from '../movieButton/MovieButton'
 
 export default function GenreBar() {
   const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()
@@ -14,21 +15,12 @@ export default function GenreBar() {
   return (
     <div>
       {genres.map((g) => (
-        <button
+        <MovieButton
           key={g.id}
+          genre={g.name}
+          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
           onClick={() => fetchGenreByTrend(g.id)}
-          title={g.name}
-        >
-          {g.name}
-        </button>
-
-        // <MovieButton
-        //   key={g.id}
-        //   // onClick={() => fetchGenreByTrend(g.id)}
-        //   genre={g.name}
-        //   link={`/${g.name}`}
-        //   className=""
-        // />
+        />
       ))}
     </div>
   )
