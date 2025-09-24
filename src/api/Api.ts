@@ -21,4 +21,5 @@ export async function searchMovies(name: string) {
   const { data } = await api.get<ITrendingMovies>("/trending/movie/day/", {
     params: { i: id },
   })
+  return data
 }
