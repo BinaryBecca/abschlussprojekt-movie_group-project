@@ -1,13 +1,13 @@
 import React, { createContext, useMemo, useReducer, useState } from "react"
-import { getGenres, getTrendingMoviesByGenres, searchMovies } from "../api/Api"
+import { getGenres, filterTrendingMoviesByGenres, searchMovies, getTrendingMoviesByGenres } from "../api/Api"
 import type { IState } from "../interfaces/ProviderInterfaces"
 import { initialState, reducer } from "../functions/Functions"
 import type { Result } from "../interfaces/ITrendingMovies"
-
 // TODO Infos in Component MovieCard umlagern
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
+  fetchGenreByTrend: (genreId: number) => Promise<void>
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
   setQuery: (query: string) => void
@@ -26,6 +26,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
   async function fetchGenreNavBar() {
     dispatch({ type: "FETCH_START" })
     try {
+      // ! getGenres function stammt aus Api.ts
       const data = await getGenres()
       // ! Wenn data.genres null oder undefined ist dann leeres Array
       dispatch({ type: "FETCH_GENRES", payload: data.genres ?? [] })
@@ -33,6 +34,23 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       dispatch({
         type: "FETCH_ERROR",
         payload: err?.message ?? "Fehler beim Laden der Genres",
+      })
+    }
+  }
+
+  async function fetchGenreByTrend(genreId: number) {
+    dispatch({ type: "FETCH_START" })
+    try {
+      // ! getTrendingMoviesByGenres function stammt aus Api.ts
+      const data = await filterTrendingMoviesByGenres(genreId)
+
+      const filtered = data.results?.filter((m) => (Array.isArray(m.genre_ids) && m.genre_ids.includes(genreId)) ?? [])
+
+      dispatch({ type: "FETCH_TRENDING", payload: filtered })
+    } catch (err: any) {
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: err?.message ?? "Fehler beim Laden der GenreIDS",
       })
     }
   }
@@ -83,7 +101,10 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       dispatch({ type: "FETCH_TRENDING", payload: slim })
       console.log(slim)
     } catch (error: any) {
-      dispatch({ type: "FETCH_ERROR", payload: error.message ?? "Fehler bei der Suchanfrage." })
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: error.message ?? "Fehler bei der Suchanfrage.",
+      })
     }
   }
 
@@ -91,13 +112,14 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     () => ({
       ...states,
       fetchGenreNavBar,
-      fetchTrendingMovies,
       searchMovieByName,
       setQuery,
+      fetchTrendingMovies,
       setSearch,
+      fetchGenreByTrend,
       search,
     }),
-    [states]
+    [states, search]
   )
 
   return <mainContext.Provider value={value}>{children}</mainContext.Provider>

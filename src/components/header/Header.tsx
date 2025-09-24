@@ -1,11 +1,15 @@
-import SearchBar from "../searchBar/SearchBar"
+import SearchBar from '../searchBar/SearchBar'
+import GenreBar from '../genreBar/GenreBar'
 
 export default function Header() {
   return (
     <>
       <header>
-        <section></section>
+        <section className="p-4">
+          <img src="../../../public/img/logo_mov.svg" alt=".mov Logo" className="w-10 m-auto" />
+        </section>
         <SearchBar />
+        <GenreBar />
       </header>
     </>
   )
