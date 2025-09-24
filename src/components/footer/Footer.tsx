@@ -14,7 +14,7 @@ export default function Footer() {
       </nav>
 
       <nav>
-        <NavButton link="/" img="" text="Home" className="" />
+        <NavButton link="/" img="/" text="Home" className="" />
         <NavButton link="/favorites" img="" className="" />
         <NavButton link="/download" img="" className="" />
         <NavButton link="/favorites" img="" className="" />
