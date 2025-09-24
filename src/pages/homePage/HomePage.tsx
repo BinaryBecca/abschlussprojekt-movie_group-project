@@ -4,11 +4,6 @@ import useMovies from "../../functions/Functions"
 import MovieSlider from "../../components/movieSlider/MovieSlider"
 
 export default function HomePage() {
-  return (
-    <div>
-      <SearchBar />
-    </div>
-  )
   const { fetchTrendingMovies, trending } = useMovies()
 
   useEffect(() => {
@@ -16,8 +11,13 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div>
-      <MovieSlider movies={trending} />
-    </div>
+    <>
+      <div>
+        <SearchBar />
+      </div>
+      <div>
+        <MovieSlider movies={trending} />
+      </div>
+    </>
   )
 }

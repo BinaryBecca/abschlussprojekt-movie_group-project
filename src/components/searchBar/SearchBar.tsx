@@ -18,7 +18,7 @@ export default function SearchBar() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <input
           type="text"
           placeholder="Search Movie…"
@@ -26,6 +26,10 @@ export default function SearchBar() {
           onChange={(event) => setQuery(event.target.value)}
         />
         <button type="button" onClick={handleSearch}></button>
+      </div> */}
+      <div>
+        <input type="text" placeholder="test" />
+        <button>Hallo</button>
       </div>
     </>
   )
