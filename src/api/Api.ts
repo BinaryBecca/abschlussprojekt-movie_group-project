@@ -14,7 +14,7 @@ export async function getGenres() {
 }
 
 export async function filterTrendingMoviesByGenres(gendreId: number) {
-  const { data } = await api.get<ITrendingMovies>(`/trending/movie/day?`, {
+  const { data } = await api.get<ITrendingMovies>(`/trending/movie/day`, {
     params: { api_key: myAPI, with_genres: gendreId },
   })
   return data

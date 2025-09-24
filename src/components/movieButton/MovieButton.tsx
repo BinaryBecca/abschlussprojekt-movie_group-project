@@ -2,10 +2,8 @@ import { Link } from "react-router"
 
 interface MovieButtonProps {
   link: string
-  img?: string
   className?: string
   linkClassName?: string
-  textClassName?: string
   genre?: string
   key?: number
   text?: string
