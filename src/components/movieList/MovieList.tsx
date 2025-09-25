@@ -8,17 +8,20 @@ interface MovieListProps {
 export default function MovieList({ movies }: MovieListProps) {
   return (
     <>
-      <div>
-        <h5>Trending Movies</h5>
-      </div>
-
-      {movies.map((movie) => {
-        return (
-          <li key={movie.id}>
-            <MovieCard movie={movie} />
-          </li>
-        )
-      })}
+      <section>
+        <div className="mb-4">
+          <h1>Trending Movies</h1>
+        </div>
+        <ul className="list-none p-0">
+          {movies.map((movie) => {
+            return (
+              <li key={movie.id} className="">
+                <MovieCard movie={movie} />
+              </li>
+            )
+          })}
+        </ul>
+      </section>
     </>
   )
 }
