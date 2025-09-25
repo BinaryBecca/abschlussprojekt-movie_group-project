@@ -15,50 +15,61 @@ function isDetails(m: IMovieDetails | Result): m is IMovieDetails {
 
 export default function MovieCard({ movie }: MovieCarouselCardProps) {
   const { genres } = useMovies()
+  // ? Gemeinsame Felder für IMovieDetails und Result
   const id = movie.id
   const title = movie.title
   const posterPath = movie.poster_path
   const year = movie.release_date ? movie.release_date.slice(0, 4) : ''
+
+  // ? Genres als Text (Details: Namen vorhanden, sonst via genre_ids auflösen)
   const genreNames = isDetails(movie)
     ? movie.genres.map((g) => g.name).join(' | ')
     : movie.genre_ids
-        ?.map((id) => genres.find((g) => g.id === id)?.name)
+        ?.map((gid) => genres.find((g) => g.id === gid)?.name)
         .filter(Boolean)
         .join(' | ') || ''
-  // Laufzeit (nur bei Details vorhanden)
+
+  // Laufzeit
   const runtime = isDetails(movie) ? movie.runtime : undefined
+
   const IMG_URL = 'https://image.tmdb.org/t/p/w500/'
   const frontImg = IMG_URL + movie.poster_path
 
   const roundedVoteAverage = Number(movie.vote_average).toFixed(1)
 
   return (
-    <section className=" border border-white m-5">
-      <div className="grid grid-cols-[1fr_2fr] p-5 items-center">
-        <Link to={`/details/${id}`}>
+    <section className="mb-4">
+      <div className="flex items-start gap-4 w-full">
+        <Link to={`/details/${movie.id}`}>
           <img
-            className="rounded-4xl h-auto max-h-[20em]"
+            className="rounded-[0.6rem] h-auto max-h-[10rem]"
             src={frontImg}
             alt={title}
+            onError={(e) => {
+              ;(e.currentTarget as HTMLImageElement).src =
+                '/img/placeholder.jpg'
+            }}
           />
         </Link>
 
-        <div className="flex flex-col gap-10">
-          <div className="flex flex-row justify-between items-center">
-            <h4 className="text-2xl font-bold">{title}</h4>
+        <div className="flex flex-col items-stretch justify-between gap-2 w-full">
+          <div className="flex flex-row justify-between items-baseline">
+            <h3 className="!text-[1.2rem] font-bold ">{title}</h3>
             <NavButton
-              link="/favorites"
-              img="/icon_download.svg"
+              link="/favorite"
+              img="/img/icon_favorites.svg"
               className=""
-              classNameImg="h-8"
+              classNameImg="h-6"
             />
           </div>
 
-          <div className="flex flex-row justify-between items-center font-light">
-            <p>⭐ {roundedVoteAverage}</p>
-            {year && <p>● {year}</p>}
-            {genreNames && <p>● {genreNames}</p>}
-            {runtime !== undefined && <p>● {runtime} min</p>}
+          <div className="flex flex-row justify-start  items-center gap-2 font-light text-[0.8rem]">
+            <p className="tracking-wide">
+              ⭐ {roundedVoteAverage}
+              {year && <> ● {year}</>}
+              {genreNames && <> ● {genreNames}</>}
+              {runtime !== undefined && <> ● {runtime} min</>}
+            </p>
           </div>
         </div>
       </div>

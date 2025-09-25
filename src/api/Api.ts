@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { IGenres } from '../interfaces/IGenres'
-import type { ITrendingMovies } from '../interfaces/ITrendingMovies'
+import type { ITrendingMovies, Result } from '../interfaces/ITrendingMovies'
 import type { IMovieDetails } from '../interfaces/IMovieDetails'
 import type { IVideo } from '../interfaces/IVideo'
 
@@ -58,8 +58,13 @@ export async function getMoviesByGenre(genreId: number, page = 1) {
   return data
 }
 
+// clg data -> page: number, results: Result[], total_pages: number, total_results: number
+export interface ISearchResponse {
+  results: Result[]
+}
+
 export async function searchMovies(name: string) {
-  const { data } = await api.get<ITrendingMovies>(
+  const { data } = await api.get<ISearchResponse>(
     `/search/movie?api_key=${myAPI}`,
     {
       params: { query: name },

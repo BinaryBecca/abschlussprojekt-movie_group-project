@@ -16,11 +16,11 @@ import {
 } from '../api/Api'
 import type { IState } from '../interfaces/ProviderInterfaces'
 import { initialState, reducer } from '../functions/Functions'
-import type { Result } from '../interfaces/ITrendingMovies'
+import type { IMovieDetails } from '../interfaces/IMovieDetails'
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
-  fetchDetailedMovie: (id: number) => Promise<void>
+  fetchDetailedMovie: (id: number) => Promise<IMovieDetails>
   fetchGenreByTrend: (genreId: number) => Promise<void>
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
@@ -34,6 +34,8 @@ export interface MainProviderProps extends IState {
     React.SetStateAction<'loading' | 'start' | 'home'>
   >
   displayScreen: 'loading' | 'start' | 'home'
+  setClickedOnSearchButton: React.Dispatch<React.SetStateAction<boolean>>
+  clickedOnSearchButton: boolean
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -52,6 +54,8 @@ export default function MainProvider({
   const [displayScreen, setDisplayScreen] = useState<
     'loading' | 'start' | 'home'
   >('loading')
+  const [clickedOnSearchButton, setClickedOnSearchButton] =
+    useState<boolean>(false)
 
   // ? Fetch Genre NavBar
   async function fetchGenreNavBar() {
@@ -83,7 +87,7 @@ export default function MainProvider({
     }
   }
 
-  async function fetchDetailedMovie(id: number) {
+  async function fetchDetailedMovie(id: number): Promise<IMovieDetails> {
     dispatch({ type: 'FETCH_START' })
     try {
       const data = await getDetailedMovie(id)
@@ -94,6 +98,7 @@ export default function MainProvider({
         type: 'FETCH_ERROR',
         payload: err?.message ?? 'Fehler beim Laden der Details',
       })
+      throw err
     }
   }
 
@@ -154,29 +159,19 @@ export default function MainProvider({
   async function searchMovieByName(name: string) {
     dispatch({ type: 'FETCH_START' })
     dispatch({ type: 'FETCH_QUERY', payload: name })
+    setClickedOnSearchButton(true)
+
     try {
       const data = await searchMovies(name)
-      const slim: Result[] =
-        data.results?.map((movie: any) => ({
-          poster_path: movie.poster_path,
-          title: movie.title,
-          vote_average: movie.vote_average,
-          release_date: movie.release_date,
-          genre_ids: movie.genre_ids,
+      console.log('data', data)
+      const results = data.results ?? []
+      // # typescript Fejlermeldung fixen!
+      // für jedes Suchergebnis Details
+      const detailResults = await Promise.all(
+        results.map((movie) => getDetailedMovie(movie.id))
+      )
 
-          // ! In MovieCard umlagern
-          // <div>
-          //   <img src={movie.poster_path} alt={movie.title} />
-          //   <h3>{movie.title}</h3>
-          //   <p>{movie.vote_average}</p>
-          //   <p>{movie.release_date}</p>
-          //   <p>{movie.genre_ids[0]}</p>
-          // </div>
-          // const IMG_URL = "https://image.tmdb.org/t/p/w500/"
-          // const frontImg = IMG_URL + movie.poster_path
-        })) ?? []
-      dispatch({ type: 'FETCH_SEARCHRESULTS', payload: slim })
-      console.log(slim)
+      dispatch({ type: 'FETCH_SEARCHRESULTS', payload: detailResults })
     } catch (error: any) {
       dispatch({
         type: 'FETCH_ERROR',
@@ -213,8 +208,10 @@ export default function MainProvider({
       search,
       loader,
       displayScreen,
+      clickedOnSearchButton,
+      setClickedOnSearchButton,
     }),
-    [states, search, loader, displayScreen]
+    [states, search, loader, displayScreen, clickedOnSearchButton]
   )
 
   return <mainContext.Provider value={value}>{children}</mainContext.Provider>
