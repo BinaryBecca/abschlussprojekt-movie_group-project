@@ -1,42 +1,132 @@
+@font-face {
+  font-family: 'Raleway-Variable';
+  src: url('/public/fonts/Raleway-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Raleway-Italic-Variable';
+  src: url('/public/fonts/Raleway-Italic-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Amiko-Regular';
+  src: url('/public/fonts/Amiko-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Amiko-Bold';
+  src: url('/public//fonts/Amiko-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Nunito-Variable';
+  src: url('/public/fonts/Raleway-Italic-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Nunito-Italic-Variable';
+  src: url('/public/fonts/NunitoSans-Italic-VariableFont.ttf');
+}
+
 @import 'tailwindcss';
+
+@theme {
+  --color-green: #4da895;
+  --color-lightgreen: #b7f3bb;
+  --color-darkblue: #181732;
+  --color-darkgrey: #3e434b;
+  --color-mediumgrey: #a1b9b5;
+  --color-lightgrey: #e7efed;
+
+  --font-base: 'Amiko-Regular', sans-serif;
+  --font-healdine: 'Raleway-Variable', sans-serif;
+  --font-button: 'Nunito-Variable', sans-serif;
+}
+
+@layer base {
+  * {
+    @apply font-base;
+    @apply text-lightgrey;
+    @apply box-border;
+    @apply m-0;
+    @apply p-0;
+  }
+
+  body {
+    @apply h-screen;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-healdine;
+    @apply text-green;
+  }
+
+  a {
+    @apply no-underline;
+  }
+
+  ul {
+    @apply list-none;
+  }
+}
 
 /* -------- Loading Animation --------- */
 
 .loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 10rem;
-  height: 10rem;
-  background: linear-gradient(
-    165deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgb(220, 220, 220) 40%,
-    rgb(161, 185, 181) 98%,
-    rgb(10, 10, 10) 100%
-  );
-  border-radius: 50%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 10rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
-
+.loading:before,
+.loading:after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  animation: pulsOut 1.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75));
+}
 .loading:before {
   position: absolute;
   content: '';
   width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  border-bottom: 0 solid #ffffff05;
-  box-shadow: 0 -10px 20px 20px #ffffff40 inset,
-    0 -5px 15px 10px #ffffff50 inset, 0 -2px 5px #ffffff80 inset,
-    0 -3px 2px #ffffffbb inset, 0 2px 0px #ffffff, 0 2px 3px #ffffff,
-    0 5px 5px #ffffff90, 0 10px 15px #ffffff60, 0 10px 20px 20px #ffffff40;
-  filter: blur(3px);
-  animation: 2s rotate linear infinite;
+  padding-bottom: 100%;
+  box-shadow: inset 0 0 0 1rem #fff;
+  animation-name: pulsIn;
+}
+.loading:after {
+  width: calc(100% - 2rem);
+  padding-bottom: calc(100% - 2rem);
+  box-shadow: 0 0 0 0 #fff;
 }
 
-@keyframes rotate {
+@keyframes pulsIn {
+  0% {
+    box-shadow: inset 0 0 0 1rem #fff;
+    opacity: 1;
+  }
+  50%,
   100% {
-    transform: rotate(360deg);
+    box-shadow: inset 0 0 0 0 #fff;
+    opacity: 0;
+  }
+}
+
+@keyframes pulsOut {
+  0%,
+  50% {
+    box-shadow: 0 0 0 0 #fff;
+    opacity: 0;
+  }
+  100% {
+    box-shadow: 0 0 0 1rem #fff;
+    opacity: 1;
   }
 }
