@@ -1,3 +1,12 @@
+import MovieList from "../../components/movieList/MovieList"
+import useMovies from "../../functions/Functions"
+
 export default function TrendingMoviesPage() {
-  return <div>TrendingMoviesPage</div>
+  const { trending } = useMovies()
+
+  return (
+    <div>
+      <MovieList movies={trending} />
+    </div>
+  )
 }
