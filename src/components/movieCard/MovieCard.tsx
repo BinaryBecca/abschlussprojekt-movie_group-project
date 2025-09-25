@@ -13,28 +13,23 @@ export default function MovieCard({ movie }: MovieCarouselCardProps) {
   const roundedVoteAverage = Number(movie.vote_average).toFixed(1)
 
   return (
-    <section className=" border border-white m-5">
-      <div className="grid grid-cols-[1fr_2fr] p-5 items-center">
+    <section className="mb-4">
+      <div className="flex items-start gap-4 w-full">
         <Link to={`/details/${movie.id}`}>
-          <img className="rounded-4xl h-auto max-h-[20em]" src={frontImg} alt={movie.title} />
+          <img className="rounded-[0.6rem] h-auto max-h-[10rem]" src={frontImg} alt={movie.title} />
         </Link>
 
-        <div className="flex flex-col gap-10">
-          <div className="flex flex-row justify-between items-center">
-            <h4 className="text-2xl font-bold">{movie.title}</h4>
-            <NavButton link="/favorites" img="/img/icon_favorites.svg" className="" classNameImg="h-8" />
+        <div className="flex flex-col items-stretch justify-between gap-2 w-full">
+          <div className="flex flex-row justify-between items-baseline">
+            <h3 className="!text-[1.2rem] font-bold ">{movie.title}</h3>
+            <NavButton link="/favorite" img="/img/icon_favorites.svg" className="" classNameImg="h-6" />
           </div>
 
-          <div className="flex flex-row justify-between items-center font-light">
-            <p>⭐ {roundedVoteAverage} </p>
-            <p>●</p>
-            <p>{movie.release_date.slice(0, 4)}</p>
-            <p>●</p>
-            <div className="flex flex-row">
-              <p>{movie.genres?.map((genre) => genre.name).join(" | ")}</p>
-            </div>
-            <p>●</p>
-            <p>{movie.runtime} min</p>
+          <div className="flex flex-row justify-start  items-center gap-2 font-light text-[0.8rem]">
+            <p className="tracking-wide">
+              ⭐ {roundedVoteAverage} ● {movie.release_date.slice(0, 4)} ●{"  "}
+              {movie.genres?.map((genre) => genre.name).join(" | ")} {"  "}● {movie.runtime}
+            </p>
           </div>
         </div>
       </div>
