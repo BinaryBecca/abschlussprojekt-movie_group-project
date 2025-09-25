@@ -1,4 +1,10 @@
-import React, { createContext, useEffect, useMemo, useReducer, useState } from "react"
+import React, {
+  createContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react'
 import {
   getGenres,
   filterTrendingMoviesByGenres,
@@ -6,10 +12,10 @@ import {
   getTrendingMoviesByGenres,
   getDetailedMovie,
   getMovieVideos,
-} from "../api/Api"
-import type { IState } from "../interfaces/ProviderInterfaces"
-import { initialState, reducer } from "../functions/Functions"
-import type { Result } from "../interfaces/ITrendingMovies"
+} from '../api/Api'
+import type { IState } from '../interfaces/ProviderInterfaces'
+import { initialState, reducer } from '../functions/Functions'
+import type { Result } from '../interfaces/ITrendingMovies'
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
@@ -22,102 +28,115 @@ export interface MainProviderProps extends IState {
   setSearch: React.Dispatch<React.SetStateAction<string>>
   search: string
   loader: boolean
-  setDisplayScreen: React.Dispatch<React.SetStateAction<"loading" | "start" | "home">>
-  displayScreen: "loading" | "start" | "home"
+  setDisplayScreen: React.Dispatch<
+    React.SetStateAction<'loading' | 'start' | 'home'>
+  >
+  displayScreen: 'loading' | 'start' | 'home'
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const mainContext = createContext<MainProviderProps | undefined>(undefined)
+export const mainContext = createContext<MainProviderProps | undefined>(
+  undefined
+)
 
-export default function MainProvider({ children }: { children: React.ReactNode }) {
+export default function MainProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const [states, dispatch] = useReducer(reducer, initialState)
-  const [search, setSearch] = useState<string>("")
+  const [search, setSearch] = useState<string>('')
   const [loader, setLoader] = useState<boolean>(true)
-  const [displayScreen, setDisplayScreen] = useState<"loading" | "start" | "home">("loading")
+  const [displayScreen, setDisplayScreen] = useState<
+    'loading' | 'start' | 'home'
+  >('loading')
 
   // ? Fetch Genre NavBar
   async function fetchGenreNavBar() {
-    dispatch({ type: "FETCH_START" })
+    dispatch({ type: 'FETCH_START' })
     try {
       // ! getGenres function stammt aus Api.ts
       const data = await getGenres()
       // ! Wenn data.genres null oder undefined ist dann leeres Array
-      dispatch({ type: "FETCH_GENRES", payload: data.genres ?? [] })
+      dispatch({ type: 'FETCH_GENRES', payload: data.genres ?? [] })
     } catch (err: any) {
       dispatch({
-        type: "FETCH_ERROR",
-        payload: err?.message ?? "Fehler beim Laden der Genres",
+        type: 'FETCH_ERROR',
+        payload: err?.message ?? 'Fehler beim Laden der Genres',
       })
     }
   }
 
   // ? Fetch Movie Videos
   async function fetchMovieVideos(id: number) {
-    dispatch({ type: "FETCH_START" })
+    dispatch({ type: 'FETCH_START' })
     try {
       const videos = await getMovieVideos(id)
-      dispatch({ type: "FETCH_VIDEOS", payload: videos })
+      dispatch({ type: 'FETCH_VIDEOS', payload: videos })
     } catch (err: any) {
       dispatch({
-        type: "FETCH_ERROR",
-        payload: err.message ?? "Fehler beim Laden der Videos",
+        type: 'FETCH_ERROR',
+        payload: err.message ?? 'Fehler beim Laden der Videos',
       })
     }
   }
 
   async function fetchDetailedMovie(id: number) {
-    dispatch({ type: "FETCH_START" })
+    dispatch({ type: 'FETCH_START' })
     try {
       const data = await getDetailedMovie(id)
-      dispatch({ type: "FETCH_DETAILS", payload: data })
+      dispatch({ type: 'FETCH_DETAILS', payload: data })
       return data
     } catch (err: any) {
       dispatch({
-        type: "FETCH_ERROR",
-        payload: err?.message ?? "Fehler beim Laden der Details",
+        type: 'FETCH_ERROR',
+        payload: err?.message ?? 'Fehler beim Laden der Details',
       })
     }
   }
 
   async function fetchGenreByTrend(genreId: number) {
-    dispatch({ type: "FETCH_START" })
+    dispatch({ type: 'FETCH_START' })
     try {
       // ! getTrendingMoviesByGenres function stammt aus Api.ts
       const data = await filterTrendingMoviesByGenres(genreId)
 
-      const filtered = data.results?.filter((m) => (Array.isArray(m.genre_ids) && m.genre_ids.includes(genreId)) ?? [])
+      const filtered = data.results?.filter(
+        (m) =>
+          (Array.isArray(m.genre_ids) && m.genre_ids.includes(genreId)) ?? []
+      )
 
-      dispatch({ type: "FETCH_TRENDING", payload: filtered })
+      dispatch({ type: 'FETCH_TRENDING', payload: filtered })
     } catch (err: any) {
       dispatch({
-        type: "FETCH_ERROR",
-        payload: err?.message ?? "Fehler beim Laden der GenreIDS",
+        type: 'FETCH_ERROR',
+        payload: err?.message ?? 'Fehler beim Laden der GenreIDS',
       })
     }
   }
 
   // ? Fetch Trending Movies
   async function fetchTrendingMovies() {
-    dispatch({ type: "FETCH_START" })
+    dispatch({ type: 'FETCH_START' })
     try {
       const data = await getTrendingMoviesByGenres()
-      dispatch({ type: "FETCH_TRENDING", payload: data.results ?? [] })
+      dispatch({ type: 'FETCH_TRENDING', payload: data.results ?? [] })
     } catch (err: any) {
       dispatch({
-        type: "FETCH_ERROR",
-        payload: err?.message ?? "Fehler beim Laden der Genres",
+        type: 'FETCH_ERROR',
+        payload: err?.message ?? 'Fehler beim Laden der Genres',
       })
     }
   }
 
   function setQuery(query: string) {
-    dispatch({ type: "FETCH_QUERY", payload: query })
+    dispatch({ type: 'FETCH_QUERY', payload: query })
   }
 
   // ? Fetch Search
   async function searchMovieByName(name: string) {
-    dispatch({ type: "FETCH_START" })
-    dispatch({ type: "FETCH_QUERY", payload: name })
+    dispatch({ type: 'FETCH_START' })
+    dispatch({ type: 'FETCH_QUERY', payload: name })
     try {
       const data = await searchMovies(name)
       const slim: Result[] =
@@ -139,21 +158,21 @@ export default function MainProvider({ children }: { children: React.ReactNode }
           // const IMG_URL = "https://image.tmdb.org/t/p/w500/"
           // const frontImg = IMG_URL + movie.poster_path
         })) ?? []
-      dispatch({ type: "FETCH_SEARCHRESULTS", payload: slim })
+      dispatch({ type: 'FETCH_SEARCHRESULTS', payload: slim })
       console.log(slim)
     } catch (error: any) {
       dispatch({
-        type: "FETCH_ERROR",
-        payload: error.message ?? "Fehler bei der Suchanfrage.",
+        type: 'FETCH_ERROR',
+        payload: error.message ?? 'Fehler bei der Suchanfrage.',
       })
     }
   }
 
   // ? Startscreen Loading Simluation
   useEffect(() => {
-    if (displayScreen === "loading") {
+    if (displayScreen === 'loading') {
       const timer = setTimeout(() => {
-        setDisplayScreen("start")
+        setDisplayScreen('start')
       }, 3000)
       return () => clearTimeout(timer)
     }
