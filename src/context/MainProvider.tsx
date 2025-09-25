@@ -46,6 +46,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       const data = await getGenres()
       // ! Wenn data.genres null oder undefined ist dann leeres Array
       dispatch({ type: "FETCH_GENRES", payload: data.genres ?? [] })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       dispatch({
         type: "FETCH_ERROR",
@@ -60,6 +61,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     try {
       const videos = await getMovieVideos(id)
       dispatch({ type: "FETCH_VIDEOS", payload: videos })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       dispatch({
         type: "FETCH_ERROR",
@@ -74,6 +76,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       const data = await getDetailedMovie(id)
       dispatch({ type: "FETCH_DETAILS", payload: data })
       return data
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       dispatch({
         type: "FETCH_ERROR",
@@ -90,7 +93,10 @@ export default function MainProvider({ children }: { children: React.ReactNode }
 
       const filtered = data.results?.filter((m) => (Array.isArray(m.genre_ids) && m.genre_ids.includes(genreId)) ?? [])
 
-      dispatch({ type: "FETCH_TRENDING", payload: filtered })
+      const detailedFiltered = await Promise.all(filtered.map((movie) => getDetailedMovie(movie.id)))
+
+      dispatch({ type: "FETCH_TRENDING", payload: detailedFiltered })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       dispatch({
         type: "FETCH_ERROR",
@@ -104,7 +110,12 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     dispatch({ type: "FETCH_START" })
     try {
       const data = await getTrendingMoviesByGenres()
-      dispatch({ type: "FETCH_TRENDING", payload: data.results ?? [] })
+      const results = data.results ?? []
+
+      const detailResults = await Promise.all(results.map((movie) => getDetailedMovie(movie.id)))
+
+      dispatch({ type: "FETCH_TRENDING", payload: detailResults })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       dispatch({
         type: "FETCH_ERROR",
@@ -132,6 +143,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       const detailResults = await Promise.all(results.map((movie) => getDetailedMovie(movie.id)))
 
       dispatch({ type: "FETCH_SEARCHRESULTS", payload: detailResults })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       dispatch({
         type: "FETCH_ERROR",
@@ -169,7 +181,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       setClickedOnSearchButton,
       clickedOnSearchButton,
     }),
-    [states, search, displayScreen]
+    [states, search, displayScreen, clickedOnSearchButton]
   )
 
   return <mainContext.Provider value={value}>{children}</mainContext.Provider>
