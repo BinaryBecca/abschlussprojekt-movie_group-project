@@ -46,6 +46,18 @@ export async function getMovieVideos(id: number) {
   return data.results as IVideo[]
 }
 
+export async function getMoviesByGenre(genreId: number, page = 1) {
+  const { data } = await api.get<ITrendingMovies>('/discover/movie', {
+    params: {
+      api_key: myAPI,
+      with_genres: genreId,
+      sort_by: 'popularity.desc',
+      page,
+    },
+  })
+  return data
+}
+
 export async function searchMovies(name: string) {
   const { data } = await api.get<ITrendingMovies>(
     `/search/movie?api_key=${myAPI}`,
