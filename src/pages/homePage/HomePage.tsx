@@ -15,7 +15,9 @@ export default function HomePage() {
 
   return (
     <>
-      <div>{searchInput ? <SearchResults results={searchResults} /> : <MovieCarousel movies={trending} />}</div>
+      <div className="h-full">
+        {searchInput ? <SearchResults results={searchResults} /> : <MovieCarousel movies={trending} />}
+      </div>
     </>
   )
 }

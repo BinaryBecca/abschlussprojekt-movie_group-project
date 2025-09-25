@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: "Nunito-Variable";
-  src: url("/public/fonts/Raleway-Italic-VariableFont_wght.ttf");
+  src: url("/public/fonts/NunitoSans-VariableFont.ttf");
 }
 
 @font-face {
@@ -53,7 +53,7 @@
   }
 
   body {
-    @apply h-screen;
+    @apply bg-darkblue;
   }
 
   h1,

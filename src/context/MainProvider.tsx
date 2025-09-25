@@ -10,7 +10,6 @@ import {
 import type { IState } from "../interfaces/ProviderInterfaces"
 import { initialState, reducer } from "../functions/Functions"
 import type { Result } from "../interfaces/ITrendingMovies"
-// TODO Infos in Component MovieCard umlagern
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
