@@ -1,15 +1,24 @@
-import SearchBar from "../searchBar/SearchBar"
-import GenreBar from "../genreBar/GenreBar"
+import SearchBar from '../searchBar/SearchBar'
+import GenreBar from '../genreBar/GenreBar'
 
-export default function Header() {
+type HeaderProps = {
+  hideControls?: boolean
+}
+
+export default function Header({ hideControls }: HeaderProps) {
   return (
     <>
       <header>
         <section className="p-4">
-          <img src="../../../public/img/logo_mov.svg" alt=".mov Logo" className="w-12 m-auto" />
+          <img
+            src="../../../public/img/logo_mov.svg"
+            alt=".mov Logo"
+            className="w-12 m-auto"
+          />
         </section>
-        <SearchBar />
-        <GenreBar />
+        {/* SearchBar und GenreBar werden nur angezeigt wenn erlaubt */}
+        {!hideControls && <SearchBar />}
+        {!hideControls && <GenreBar />}
       </header>
     </>
   )
