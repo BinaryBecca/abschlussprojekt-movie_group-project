@@ -17,12 +17,12 @@ export default function Layout() {
   }
 
   return (
-    <>
-      <>
-        <Header />
+    <div className="bg-darkblue">
+      <Header />
+      <main>
         <Outlet />
-        <Footer />
-      </>
-    </>
+      </main>
+      <Footer />
+    </div>
   )
 }
