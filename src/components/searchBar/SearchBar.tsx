@@ -13,6 +13,7 @@ export default function SearchBar() {
       )
     }
     searchMovieByName(q)
+    setQuery("")
     console.log(q)
   }
 

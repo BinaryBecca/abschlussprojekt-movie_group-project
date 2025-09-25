@@ -4,19 +4,17 @@ import MovieCarousel from "../../components/movieCarousel/MovieCarousel"
 import SearchResults from "../../components/searchResults/SearchResults"
 
 export default function HomePage() {
-  const { fetchTrendingMovies, trending, query, searchResults } = useMovies()
+  const { fetchTrendingMovies, trending, searchResults, clickedOnSearchButton } = useMovies()
   // console.log("rendering", { trending, query, searchResults })
 
   useEffect(() => {
     fetchTrendingMovies()
   }, [])
 
-  const searchInput = query.trim().length > 0
-
   return (
     <>
       <div className="h-full">
-        {searchInput ? <SearchResults results={searchResults} /> : <MovieCarousel movies={trending} />}
+        {clickedOnSearchButton ? <SearchResults results={searchResults} /> : <MovieCarousel movies={trending} />}
       </div>
     </>
   )
