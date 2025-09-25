@@ -22,7 +22,7 @@ export default function MovieCard({ movie }: MovieCarouselCardProps) {
         <div className="flex flex-col gap-10">
           <div className="flex flex-row justify-between items-center">
             <h4 className="text-2xl font-bold">{movie.title}</h4>
-            <NavButton link="/favorites" img="/icon_download.svg" className="" classNameImg="h-8" />
+            <NavButton link="/favorites" img="/img/icon_favorites.svg" className="" classNameImg="h-8" />
           </div>
 
           <div className="flex flex-row justify-between items-center font-light">
