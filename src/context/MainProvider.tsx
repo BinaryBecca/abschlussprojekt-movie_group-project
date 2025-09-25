@@ -6,6 +6,7 @@ import {
   getTrendingMoviesByGenres,
   getDetailedMovie,
   getMovieVideos,
+  getMoviesByGenre,
 } from "../api/Api"
 import type { IState } from "../interfaces/ProviderInterfaces"
 import { initialState, reducer } from "../functions/Functions"
@@ -18,10 +19,10 @@ export interface MainProviderProps extends IState {
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
   setQuery: (query: string) => void
+  fetchMoviesByGenre: (genreId: number, page?: number) => Promise<void>
   fetchMovieVideos: (id: number) => Promise<void>
   setSearch: React.Dispatch<React.SetStateAction<string>>
   search: string
-
   setDisplayScreen: React.Dispatch<React.SetStateAction<"loading" | "start" | "home">>
   displayScreen: "loading" | "start" | "home"
   setClickedOnSearchButton: React.Dispatch<React.SetStateAction<boolean>>
@@ -69,7 +70,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       })
     }
   }
-
+  // ? Fetch Detailed Movie
   async function fetchDetailedMovie(id: number) {
     dispatch({ type: "FETCH_START" })
     try {
@@ -84,7 +85,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       })
     }
   }
-
+  // ? Fetch Genre By Trend
   async function fetchGenreByTrend(genreId: number) {
     dispatch({ type: "FETCH_START" })
     try {
@@ -101,6 +102,23 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       dispatch({
         type: "FETCH_ERROR",
         payload: err?.message ?? "Fehler beim Laden der GenreIDS",
+      })
+    }
+  }
+
+  // ? Fetch Movies by Genre
+  async function fetchMoviesByGenre(genreId: number, page = 1) {
+    dispatch({ type: "FETCH_START" })
+    try {
+      const data = await getMoviesByGenre(genreId, page)
+      const filtered = data.results?.filter((m) => (Array.isArray(m.genre_ids) && m.genre_ids.includes(genreId)) ?? [])
+      const detailedFiltered = await Promise.all(filtered.map((movie) => getDetailedMovie(movie.id)))
+      dispatch({ type: "FETCH_TRENDING", payload: detailedFiltered })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: err?.message ?? "Fehler beim Laden der Genre-Filme",
       })
     }
   }
@@ -173,6 +191,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       fetchDetailedMovie,
       fetchTrendingMovies,
       setSearch,
+      fetchMoviesByGenre,
       fetchGenreByTrend,
       setDisplayScreen,
       fetchMovieVideos,
