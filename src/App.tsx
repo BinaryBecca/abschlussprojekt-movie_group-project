@@ -2,7 +2,6 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import "./App.css"
 import Layout from "./layout/Layout"
 import HomePage from "./pages/homePage/HomePage"
-import StartPage from "./pages/startPage/StartPage"
 import LoginPage from "./pages/loginPage/LoginPage"
 import TrendingMoviesPage from "./pages/trendingMoviesPage/TrendingMoviesPage"
 import GenresPage from "./pages/genresPage/GenresPage"
@@ -13,7 +12,6 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="start" element={<StartPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="trending" element={<TrendingMoviesPage />} />
         <Route path="genres/:genreId" element={<GenresPage />} />
