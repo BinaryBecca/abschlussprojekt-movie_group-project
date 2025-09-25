@@ -18,7 +18,6 @@ export interface MainProviderProps extends IState {
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
   setQuery: (query: string) => void
-  fetchMoviesByGenre: (genreId: number, page?: number) => Promise<void>
   fetchMovieVideos: (id: number) => Promise<void>
   setSearch: React.Dispatch<React.SetStateAction<string>>
   search: string
@@ -71,7 +70,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     }
   }
 
-  async function fetchDetailedMovie(id: number): Promise<IMovieDetails> {
+  async function fetchDetailedMovie(id: number) {
     dispatch({ type: "FETCH_START" })
     try {
       const data = await getDetailedMovie(id)
@@ -83,7 +82,6 @@ export default function MainProvider({ children }: { children: React.ReactNode }
         type: "FETCH_ERROR",
         payload: err?.message ?? "Fehler beim Laden der Details",
       })
-      throw err
     }
   }
 
@@ -102,7 +100,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     } catch (err: any) {
       dispatch({
         type: "FETCH_ERROR",
-        payload: err?.message ?? "Fehler beim Laden der Genre-Filme",
+        payload: err?.message ?? "Fehler beim Laden der GenreIDS",
       })
     }
   }
@@ -175,7 +173,6 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       fetchDetailedMovie,
       fetchTrendingMovies,
       setSearch,
-      fetchMoviesByGenre,
       fetchGenreByTrend,
       setDisplayScreen,
       fetchMovieVideos,
@@ -183,7 +180,6 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       displayScreen,
       setClickedOnSearchButton,
       clickedOnSearchButton,
-      setClickedOnSearchButton,
     }),
     [states, search, displayScreen, clickedOnSearchButton]
   )
