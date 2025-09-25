@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router"
+import { Link, useLocation } from 'react-router'
 
 interface MovieButtonProps {
   link?: string
@@ -17,7 +17,11 @@ export default function MovieButton(props: MovieButtonProps) {
 
   if (props.link) {
     return (
-      <Link to={props.link} className={props.linkClassName} onClick={props.onClick}>
+      <Link
+        to={props.link}
+        className={props.linkClassName}
+        onClick={props.onClick}
+      >
         {label}
       </Link>
     )
@@ -25,8 +29,11 @@ export default function MovieButton(props: MovieButtonProps) {
 
   return (
     <button
-      className="px-4 py-2 bg-green hover:bg-lightgreen hover:text-darkblue active:bg-lightgreen active:text-darkblue rounded"
-      onClick={props.onClick}>
+      className={`px-4 py-2 bg-green hover:bg-lightgreen hover:text-darkblue active:bg-lightgreen active:text-darkblue rounded ${
+        props.className ?? ''
+      }`}
+      onClick={props.onClick}
+    >
       {label}
     </button>
   )
