@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router"
+import { Link, useLocation } from "react-router"
 
 interface MovieButtonProps {
   link?: string
@@ -12,8 +12,8 @@ interface MovieButtonProps {
 
 export default function MovieButton(props: MovieButtonProps) {
   const label = props.genre ? props.genre : props.text
-  const location = useLocation()
-  const isActive = location.pathname === props.link
+  // const location = useLocation()
+  // const isActive = location.pathname === props.link
 
   if (props.link) {
     return (
