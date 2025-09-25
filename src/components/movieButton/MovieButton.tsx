@@ -25,7 +25,7 @@ export default function MovieButton(props: MovieButtonProps) {
 
   return (
     <button
-      className="px-4 py-2 bg-green hover:bg-lightgreen hover:text-darkblue active:bg-lightgreen active:text-darkblue rounded"
+      className="py-[0.6rem] px-[1.6rem] bg-green hover:bg-lightgreen hover:text-darkblue active:bg-lightgreen active:text-darkblue rounded"
       onClick={props.onClick}>
       {label}
     </button>
