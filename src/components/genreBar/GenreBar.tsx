@@ -2,9 +2,11 @@ import { useEffect } from 'react'
 import useMovies from '../../functions/Functions'
 import MovieButton from '../movieButton/MovieButton'
 import type { Genre } from '../../interfaces/IGenres'
+import { useNavigate } from 'react-router'
 
 export default function GenreBar() {
   const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (genres.length === 0) void fetchGenreNavBar()
@@ -26,7 +28,7 @@ export default function GenreBar() {
             key={g.id}
             genre={g.name}
             className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded shrink-0"
-            onClick={() => fetchGenreByTrend(g.id)}
+            onClick={() => navigate(`/genres/${g.id}`)}
           />
         ))}
       </div>

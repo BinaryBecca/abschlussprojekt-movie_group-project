@@ -1,9 +1,10 @@
 import { Link } from "react-router"
 import type { IMovieDetails } from "../../interfaces/IMovieDetails"
+import type { Result } from "../../interfaces/ITrendingMovies"
 import MovieCard from "../movieCard/MovieCard"
 
 interface SearchResultsProps {
-  results: IMovieDetails[]
+  results: (Result | IMovieDetails)[]
 }
 
 export default function SearchResults({ results }: SearchResultsProps) {
