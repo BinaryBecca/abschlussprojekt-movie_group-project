@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import { Link, NavLink, useLocation } from "react-router"
 
 interface MovieButtonProps {
   link?: string
@@ -12,22 +12,25 @@ interface MovieButtonProps {
 
 export default function MovieButton(props: MovieButtonProps) {
   const label = props.genre ? props.genre : props.text
+  const location = useLocation()
+  const isActive = location.pathname === props.link
 
   if (props.link) {
     return (
-      <Link
-        to={props.link}
-        className={props.linkClassName}
-        onClick={props.onClick}
-      >
+      <Link to={props.link} className={props.linkClassName} onClick={props.onClick}>
         {label}
       </Link>
     )
   }
 
   return (
-    <button className={props.className} onClick={props.onClick}>
+    <button
+      className="px-4 py-2 bg-green hover:bg-lightgreen hover:text-darkblue active:bg-lightgreen active:text-darkblue rounded"
+      onClick={props.onClick}>
       {label}
     </button>
   )
 }
+
+// Code-Schnipsel für useLocation()
+// `px-4 py-2 rounded bg-green hover:bg-lightgreen hover:text-darkblue ${isActive ? "bg-lightgreen text-darkblue" : "bg-green text-lightgrey"}`

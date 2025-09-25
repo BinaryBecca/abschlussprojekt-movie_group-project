@@ -15,12 +15,7 @@ export default function GenreBar() {
   return (
     <div>
       {genres.map((g) => (
-        <MovieButton
-          key={g.id}
-          genre={g.name}
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
-          onClick={() => fetchGenreByTrend(g.id)}
-        />
+        <MovieButton key={g.id} genre={g.name} onClick={() => fetchGenreByTrend(g.id)} />
       ))}
     </div>
   )
