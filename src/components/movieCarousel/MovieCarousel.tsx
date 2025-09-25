@@ -18,15 +18,15 @@ export default function MovieCarousel({ movies }: MovieCarouselProps) {
 
   return (
     <>
-      <div className="flex flex-row justify-between px-18">
-        <h5>Trending Movies</h5>
+      <div className="flex flex-row justify-between px-6 items-baseline mb-3 ">
+        <h1>Trending Movies</h1>
         <MovieButton
           link="/trending"
           text="See all"
-          linkClassName="!text-red-500 font-bold !no-underline hover:text-xl"
+          linkClassName="!text-green font-bold !no-underline !hover:text-lightgreen"
         />
       </div>
-      <Carousel activeIndex={index} onSelect={handleSelect} className="px-10 pb-5">
+      <Carousel activeIndex={index} onSelect={handleSelect} className="px-10 pb-15 ">
         {movies.map((movie) => {
           return (
             <Carousel.Item key={movie.id}>

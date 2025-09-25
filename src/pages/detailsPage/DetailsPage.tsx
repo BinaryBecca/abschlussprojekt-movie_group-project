@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import useMovies from '../../functions/Functions'
-import TrailerModal from '../../components/trailer/TrailerModal'
-import MovieButton from '../../components/movieButton/MovieButton'
+import { useEffect, useState } from "react"
+import { useParams } from "react-router"
+import useMovies from "../../functions/Functions"
+import TrailerModal from "../../components/trailer/TrailerModal"
+import MovieButton from "../../components/movieButton/MovieButton"
 
 export default function DetailsPage() {
   const { id } = useParams<{ id: string }>()
-  const {
-    fetchDetailedMovie,
-    fetchMovieVideos,
-    details,
-    videos,
-    loading,
-    error,
-  } = useMovies()
+  const { fetchDetailedMovie, fetchMovieVideos, details, videos, loading, error } = useMovies()
 
   const [showTrailer, setShowTrailer] = useState(false)
 
@@ -24,18 +17,14 @@ export default function DetailsPage() {
     void fetchMovieVideos(num)
   }, [id])
 
-  const ytVideos = Array.isArray(videos)
-    ? videos.filter((v) => v.site === 'YouTube')
-    : []
+  const ytVideos = Array.isArray(videos) ? videos.filter((v) => v.site === "YouTube") : []
 
   const trailer =
-    ytVideos.find((v) => v.type === 'Trailer' && v.official) ||
-    ytVideos.find((v) => v.type === 'Trailer') ||
+    ytVideos.find((v) => v.type === "Trailer" && v.official) ||
+    ytVideos.find((v) => v.type === "Trailer") ||
     ytVideos[0] // Fallback: erstes YouTube-Video
 
-  const embedUrl = trailer
-    ? `https://www.youtube-nocookie.com/embed/${trailer.key}?autoplay=1&modestbranding=1`
-    : null
+  const embedUrl = trailer ? `https://www.youtube-nocookie.com/embed/${trailer.key}?autoplay=1&modestbranding=1` : null
 
   if (loading && !details) {
     return (
@@ -52,11 +41,7 @@ export default function DetailsPage() {
       <div className="mx-auto w-full max-w-md px-5 flex flex-col gap-4">
         {/* Poster-Card */}
         <img
-          src={
-            details.poster_path
-              ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
-              : '/img/placeholder.jpg'
-          }
+          src={details.poster_path ? `https://image.tmdb.org/t/p/w500${details.poster_path}` : "/img/placeholder.jpg"}
           alt={details.title}
           className="rounded-2xl"
         />
@@ -85,10 +70,8 @@ export default function DetailsPage() {
           <div className=" flex items-center justify-center pr-8">
             <img src="/public/img/icon_star.png" className="pr-2" />
 
-            {typeof details.vote_average === 'number' && (
-              <li className="list-none pt-1">
-                {details.vote_average.toFixed(1)}
-              </li>
+            {typeof details.vote_average === "number" && (
+              <li className="list-none pt-1">{details.vote_average.toFixed(1)}</li>
             )}
           </div>
         </div>
@@ -112,11 +95,7 @@ export default function DetailsPage() {
         {/* Watch Trailer mit MovieButton-Component */}
       </div>
 
-      <TrailerModal
-        open={showTrailer}
-        embedUrl={embedUrl}
-        onClose={() => setShowTrailer(false)}
-      />
+      <TrailerModal open={showTrailer} embedUrl={embedUrl} onClose={() => setShowTrailer(false)} />
     </article>
   )
 }
