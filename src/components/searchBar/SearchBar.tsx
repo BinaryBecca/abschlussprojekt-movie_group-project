@@ -18,16 +18,19 @@ export default function SearchBar() {
 
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex gap-4 px-8 relative">
         <input
           type="text"
           placeholder="Search Movie…"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          className="bg-[#E7EFED] rounded-2xl p-3 w-full"
+          className="bg-lightgrey text-darkblue rounded-2xl p-3 w-full z-5"
         />
-        <button type="button" onClick={handleSearch}>
-          <img src="../../../public/img/icon_search.png" alt="" className="w-8" />
+        <button
+          type="button"
+          onClick={handleSearch}
+          className=" hover:text-darkblue absolute right-12 top-0 bottom-8 inset-y-1/2 translate-y-1/2 z-10">
+          <img src="/img/icon_search.svg" alt="" className="w-8 m-auto" />
         </button>
       </div>
     </>
