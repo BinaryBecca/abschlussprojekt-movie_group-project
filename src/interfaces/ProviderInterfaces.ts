@@ -9,11 +9,11 @@ export interface IState {
   loading: boolean
   error: string | null
   genres: Genre[]
-  trending: Result[]
+  trending: IMovieDetails[]
   details: IMovieDetails | null
   videos: IVideo[]
   query: string
-  searchResults: Result[]
+  searchResults: IMovieDetails[]
   // details: IDetails[]
 }
 
@@ -24,7 +24,7 @@ export type TAction =
   | { type: "FETCH_GENRES"; payload: Genre[] }
   | { type: "FETCH_DETAILS"; payload: IMovieDetails }
   | { type: "FETCH_VIDEOS"; payload: IVideo[] }
-  | { type: "FETCH_TRENDING"; payload: Result[] }
+  | { type: "FETCH_TRENDING"; payload: IMovieDetails[] }
   | { type: "FETCH_SEARCHRESULTS"; payload: IMovieDetails[] }
   | { type: "FETCH_QUERY"; payload: string }
 

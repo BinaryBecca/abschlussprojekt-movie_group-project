@@ -148,7 +148,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       }, 3000)
       return () => clearTimeout(timer)
     }
-  }, [])
+  }, [displayScreen])
 
   console.log(displayScreen)
 

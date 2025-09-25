@@ -3,9 +3,10 @@ import type { Result } from "../../interfaces/ITrendingMovies"
 import MovieCarouselCard from "../movieCarouselCard/MovieCarouselCard"
 import Carousel from "react-bootstrap/Carousel"
 import MovieButton from "../movieButton/MovieButton"
+import type { IMovieDetails } from "../../interfaces/IMovieDetails"
 
 interface MovieCarouselProps {
-  movies: Result[]
+  movies: IMovieDetails[]
 }
 
 export default function MovieCarousel({ movies }: MovieCarouselProps) {

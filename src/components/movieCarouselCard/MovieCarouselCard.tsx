@@ -1,8 +1,9 @@
 import { Link } from "react-router"
 import type { Result } from "../../interfaces/ITrendingMovies"
+import type { IMovieDetails } from "../../interfaces/IMovieDetails"
 
 interface MovieCarouselCardProps {
-  movie: Result
+  movie: IMovieDetails
 }
 
 export default function MovieSliderCard({ movie }: MovieCarouselCardProps) {
