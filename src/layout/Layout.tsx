@@ -15,7 +15,7 @@ export default function Layout() {
   } else if (displayScreen === "home")
     return (
       <>
-        <div>
+        <div className="bg-darkblue">
           <>
             <Header />
             <Outlet />
