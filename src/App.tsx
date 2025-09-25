@@ -1,17 +1,11 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router'
-import './App.css'
-import Layout from './layout/Layout'
-import HomePage from './pages/homePage/HomePage'
-import StartPage from './components/startScreen/StartScreen'
-import LoginPage from './pages/loginPage/LoginPage'
-import TrendingMoviesPage from './pages/trendingMoviesPage/TrendingMoviesPage'
-import GenresPage from './pages/genresPage/GenresPage'
-import DetailsPage from './pages/detailsPage/DetailsPage'
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router"
+import "./App.css"
+import Layout from "./layout/Layout"
+import HomePage from "./pages/homePage/HomePage"
+import LoginPage from "./pages/loginPage/LoginPage"
+import TrendingMoviesPage from "./pages/trendingMoviesPage/TrendingMoviesPage"
+import GenresPage from "./pages/genresPage/GenresPage"
+import DetailsPage from "./pages/detailsPage/DetailsPage"
 
 function App() {
   const router = createBrowserRouter(
