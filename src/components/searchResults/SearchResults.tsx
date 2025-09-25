@@ -1,9 +1,8 @@
-import type { Result } from "../../interfaces/ITrendingMovies"
+import type { IMovieDetails } from "../../interfaces/IMovieDetails"
 import MovieCard from "../movieCard/MovieCard"
-import MovieCarouselCard from "../movieCarouselCard/MovieCarouselCard"
 
 interface SearchResultsProps {
-  results: Result[]
+  results: IMovieDetails[]
 }
 
 export default function SearchResults({ results }: SearchResultsProps) {
