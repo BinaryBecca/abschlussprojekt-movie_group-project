@@ -1,4 +1,4 @@
-import MovieButton from "../movieButton/MovieButton"
+import MovieButton from '../movieButton/MovieButton'
 
 interface StartScreenProps {
   onClick: () => void

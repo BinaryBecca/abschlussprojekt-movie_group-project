@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import useMovies from "../../functions/Functions"
 import MovieCarousel from "../../components/movieCarousel/MovieCarousel"
 import SearchResults from "../../components/searchResults/SearchResults"
