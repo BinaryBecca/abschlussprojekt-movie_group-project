@@ -1,4 +1,5 @@
 import type { Result } from "../../interfaces/ITrendingMovies"
+import MovieCard from "../movieCard/MovieCard"
 import MovieCarouselCard from "../movieCarouselCard/MovieCarouselCard"
 
 interface SearchResultsProps {
@@ -9,7 +10,7 @@ export default function SearchResults({ results }: SearchResultsProps) {
   return (
     <div className="flex flex-col gap-5">
       {results.map((movie) => {
-        return <MovieCarouselCard key={movie.id} movie={movie} />
+        return <MovieCard key={movie.id} movie={movie} />
       })}
     </div>
   )
