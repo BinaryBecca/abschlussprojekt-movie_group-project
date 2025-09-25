@@ -52,7 +52,7 @@
     @apply p-0;
   }
 
-  body {
+  html {
     @apply bg-darkblue;
   }
 
