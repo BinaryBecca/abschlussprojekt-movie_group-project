@@ -138,7 +138,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       const data = await searchMovies(name)
       console.log("data", data)
       const results = data.results ?? []
-      // # typescript Fejlermeldung fixen!
+
       // für jedes Suchergebnis Details
       const detailResults = await Promise.all(results.map((movie) => getDetailedMovie(movie.id)))
 

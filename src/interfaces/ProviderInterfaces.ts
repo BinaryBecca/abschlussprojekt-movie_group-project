@@ -1,6 +1,5 @@
 import type { Genre } from "./IGenres"
 import type { IMovieDetails } from "./IMovieDetails"
-import type { Result } from "./ITrendingMovies"
 import type { IVideo } from "./IVideo"
 
 // TODO API-Interfaces prüfen und ergänzen

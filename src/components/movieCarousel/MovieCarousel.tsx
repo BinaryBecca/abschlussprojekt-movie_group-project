@@ -1,5 +1,4 @@
 import { useState } from "react"
-import type { Result } from "../../interfaces/ITrendingMovies"
 import MovieCarouselCard from "../movieCarouselCard/MovieCarouselCard"
 import Carousel from "react-bootstrap/Carousel"
 import MovieButton from "../movieButton/MovieButton"
