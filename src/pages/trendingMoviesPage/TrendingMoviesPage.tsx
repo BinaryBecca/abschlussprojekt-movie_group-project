@@ -15,17 +15,14 @@ export default function TrendingMoviesPage() {
   useEffect(() => {
     async function loadDetails() {
       const show50Movies: Result[] = trending.slice(0, 50)
-      const showMoreMovies = await Promise.all(
-        show50Movies.map((movie: Result) => {
-          if (movie.id) {
-            return fetchDetailedMovie(movie.id)
-          } else {
-            return null
-          }
-        })
-      )
-      // # typescript Fejlermeldung fixen!
-      setMoreMovies(showMoreMovies)
+
+      const withId = show50Movies.filter((m): m is Result & { id: number } => typeof m.id === "number")
+
+      const showMoreMovies = await Promise.all(withId.map((m) => fetchDetailedMovie(m.id)))
+
+      const notUndefinedMovies = showMoreMovies.filter((m): m is IMovieDetails => m !== undefined)
+
+      setMoreMovies(notUndefinedMovies)
     }
 
     loadDetails()
