@@ -3,25 +3,29 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import useMovies from '../../functions/Functions'
 import MovieCarousel from '../../components/movieCarousel/MovieCarousel'
+import MovieList from '../../components/movieList/MovieList'
 
 export default function GenresPage() {
   const { genreId } = useParams<{ genreId: string }>()
-  const { fetchMoviesByGenre, trending, loading, error } = useMovies()
+  const { fetchMoviesByGenre, trending, loading, error, genres } = useMovies()
 
   useEffect(() => {
     if (genreId) void fetchMoviesByGenre(Number(genreId), 1)
   }, [genreId])
+
+  const genreName =
+    genres.find((g) => g.id === Number(genreId))?.name ?? 'Unknown'
 
   if (loading && trending.length === 0) return <div>Lade Kategorie…</div>
   if (error) return <div className="text-red-600">{error}</div>
 
   return (
     <section className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Genre: {genreId}</h2>
+      <h2 className="text-2xl font-bold mb-4">Everything in {genreName}</h2>
       {trending.length === 0 ? (
         <div>Keine Filme gefunden.</div>
       ) : (
-        <MovieCarousel movies={trending} />
+        <MovieList movies={trending} />
       )}
     </section>
   )

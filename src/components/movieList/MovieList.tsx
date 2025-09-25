@@ -1,15 +1,20 @@
-import type { IMovieDetails } from "../../interfaces/IMovieDetails"
-import MovieCard from "../movieCard/MovieCard"
+import type { IMovieDetails } from '../../interfaces/IMovieDetails'
+import type { Result } from '../../interfaces/ITrendingMovies'
+import MovieCard from '../movieCard/MovieCard'
 
 interface MovieListProps {
-  movies: IMovieDetails[]
+  movies: Result[]
+  title?: string
 }
 
-export default function MovieList({ movies }: MovieListProps) {
+export default function MovieList({
+  movies,
+  title = 'Movies',
+}: MovieListProps) {
   return (
     <>
       <div>
-        <h5>Trending Movies</h5>
+        <h5>{title}</h5>
       </div>
 
       {movies.map((movie) => {
