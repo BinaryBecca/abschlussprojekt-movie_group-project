@@ -3,10 +3,13 @@ import MovieList from "../../components/movieList/MovieList"
 import useMovies from "../../functions/Functions"
 import type { IMovieDetails } from "../../interfaces/IMovieDetails"
 import type { Result } from "../../interfaces/ITrendingMovies"
+import SearchResults from "../../components/searchResults/SearchResults"
 
 export default function TrendingMoviesPage() {
-  const { trending, fetchDetailedMovie } = useMovies()
+  const { trending, fetchDetailedMovie, searchResults, clickedOnSearchButton } = useMovies()
   const [moreMovies, setMoreMovies] = useState<IMovieDetails[]>([])
+
+  // const searchInput = query.trim().length > 0
 
   useEffect(() => {
     async function loadDetails() {
@@ -20,6 +23,7 @@ export default function TrendingMoviesPage() {
           }
         })
       )
+      // # typescript Fejlermeldung fixen!
       setMoreMovies(showMoreMovies)
     }
 
@@ -27,8 +31,6 @@ export default function TrendingMoviesPage() {
   }, [trending])
 
   return (
-    <div>
-      <MovieList movies={moreMovies} />
-    </div>
+    <div>{clickedOnSearchButton ? <SearchResults results={searchResults} /> : <MovieList movies={moreMovies} />}</div>
   )
 }

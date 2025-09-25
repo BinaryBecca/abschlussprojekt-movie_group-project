@@ -23,6 +23,8 @@ export interface MainProviderProps extends IState {
   loader: boolean
   setDisplayScreen: React.Dispatch<React.SetStateAction<"loading" | "start" | "home">>
   displayScreen: "loading" | "start" | "home"
+  setClickedOnSearchButton: React.Dispatch<React.SetStateAction<boolean>>
+  clickedOnSearchButton: boolean
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -33,6 +35,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
   const [search, setSearch] = useState<string>("")
   const [loader, setLoader] = useState<boolean>(true)
   const [displayScreen, setDisplayScreen] = useState<"loading" | "start" | "home">("loading")
+  const [clickedOnSearchButton, setClickedOnSearchButton] = useState<boolean>(false)
 
   // ? Fetch Genre NavBar
   async function fetchGenreNavBar() {
@@ -117,11 +120,13 @@ export default function MainProvider({ children }: { children: React.ReactNode }
   async function searchMovieByName(name: string) {
     dispatch({ type: "FETCH_START" })
     dispatch({ type: "FETCH_QUERY", payload: name })
+    setClickedOnSearchButton(true)
+
     try {
       const data = await searchMovies(name)
-      // console.log("data", data)
+      console.log("data", data)
       const results = data.results ?? []
-
+      // # typescript Fejlermeldung fixen!
       // für jedes Suchergebnis Details
       const detailResults = await Promise.all(results.map((movie) => getDetailedMovie(movie.id)))
 
@@ -161,6 +166,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       search,
       loader,
       displayScreen,
+      clickedOnSearchButton,
     }),
     [states, search, loader, displayScreen]
   )
