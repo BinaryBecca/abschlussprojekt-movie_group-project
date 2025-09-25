@@ -15,13 +15,13 @@ export default function MovieSliderCard({ movie }: MovieCarouselCardProps) {
   return (
     <Link
       to={`details/${movie.id}`}
-      className="relative flex items-center justify-center px-30 py-10 rounded-4xl bg-cover bg-center bg-no-repeat overflow-hidden"
+      className="relative flex items-center justify-center px-30 py-10 rounded-4xl bg-cover bg-center bg-no-repeat overflow-hidden h-80 w-[75vw] m-auto"
       style={{ backgroundImage: `url(${backImg})` }}>
       <div className="absolute h-full w-full bg-black/30"></div>
 
       {/* Carousel.Caption ergänzen! */}
       <div className="absolute bottom-1.5 justify-center z-20 text-white text-center">
-        <h4 className="text-2xl font-bold">{movie.title}</h4>
+        <h3 className="text-2xl font-bold">{movie.title}</h3>
         <p className="font-light">⭐ {roundedVoteAverage}/ 10.0</p>
       </div>
     </Link>
