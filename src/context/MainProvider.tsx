@@ -86,6 +86,7 @@ export default function MainProvider({
     try {
       const data = await getDetailedMovie(id)
       dispatch({ type: 'FETCH_DETAILS', payload: data })
+      return data
     } catch (err: any) {
       dispatch({
         type: 'FETCH_ERROR',

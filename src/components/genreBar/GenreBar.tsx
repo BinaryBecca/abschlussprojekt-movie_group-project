@@ -1,7 +1,7 @@
-import { useEffect } from "react"
-import useMovies from "../../functions/Functions"
-import MovieButton from "../movieButton/MovieButton"
-import type { Genre } from "../../interfaces/IGenres"
+import { useEffect } from 'react'
+import useMovies from '../../functions/Functions'
+import MovieButton from '../movieButton/MovieButton'
+import type { Genre } from '../../interfaces/IGenres'
 
 export default function GenreBar() {
   const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()
@@ -18,7 +18,8 @@ export default function GenreBar() {
         overflow-x-auto py-1
         px-2 md:pl-6
         [scrollbar-width:none]
-      ">
+      "
+    >
       <div className="flex gap-2 py-2 whitespace-nowrap m-3">
         {genres.map((g: Genre) => (
           <MovieButton
