@@ -5,7 +5,7 @@ import SearchResults from "../../components/searchResults/SearchResults"
 
 export default function HomePage() {
   const { fetchTrendingMovies, trending, query, searchResults } = useMovies()
-  console.log("rendering", { trending, query, searchResults })
+  // console.log("rendering", { trending, query, searchResults })
 
   useEffect(() => {
     fetchTrendingMovies()
