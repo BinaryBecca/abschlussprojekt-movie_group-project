@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import { useEffect, useState } from 'react'
 import useMovies from '../../functions/Functions'
 import MovieButton from '../movieButton/MovieButton'
 import { Carousel } from 'react-bootstrap'
 import type { Genre } from '../../interfaces/IGenres'
-=======
-import { useEffect } from "react"
-import useMovies from "../../functions/Functions"
-import MovieButton from "../movieButton/MovieButton"
->>>>>>> origin/feature_styling
 
 export default function GenreBar() {
   const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()
