@@ -25,18 +25,12 @@ export default function TrendingMoviesPage() {
       setMoreMovies(notUndefinedMovies)
     }
 
-    if (trending.length > 0) {
-      void loadDetails()
-    }
-  }, [trending, fetchDetailedMovie])
+    loadDetails()
+  }, [trending])
 
   return (
     <section className="px-6 ">
-      {clickedOnSearchButton ? (
-        <SearchResults results={searchResults} />
-      ) : (
-        <MovieList movies={moreMovies} title="Trending Movies" />
-      )}
+      {clickedOnSearchButton ? <SearchResults results={searchResults} /> : <MovieList movies={moreMovies} />}
       <div className="mb-4">
         <Link to={`/`} className=" py-1 flex items-center gap-2 !no-underline">
           <img src="/img/icon_arrow.svg" alt="Icon Arrow" className="w-5" />{" "}
