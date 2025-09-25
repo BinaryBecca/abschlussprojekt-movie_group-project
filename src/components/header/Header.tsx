@@ -10,7 +10,7 @@ export default function Header({ hideControls }: HeaderProps) {
   return (
     <>
       <header>
-        <section className="p-4">
+        <section className="p-4" id="start">
           <Link to="/">
             <img src="../../../public/img/logo_mov.svg" alt=".mov Logo" className="w-12 m-auto" />
           </Link>
