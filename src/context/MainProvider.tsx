@@ -9,10 +9,11 @@ import {
 } from "../api/Api"
 import type { IState } from "../interfaces/ProviderInterfaces"
 import { initialState, reducer } from "../functions/Functions"
+import type { IMovieDetails } from "../interfaces/IMovieDetails"
 
 export interface MainProviderProps extends IState {
   fetchGenreNavBar: () => Promise<void>
-  fetchDetailedMovie: (id: number) => Promise<void>
+  fetchDetailedMovie: (id: number) => Promise<IMovieDetails | undefined>
   fetchGenreByTrend: (genreId: number) => Promise<void>
   fetchTrendingMovies: () => Promise<void>
   searchMovieByName: (name: string) => Promise<void>
@@ -20,7 +21,7 @@ export interface MainProviderProps extends IState {
   fetchMovieVideos: (id: number) => Promise<void>
   setSearch: React.Dispatch<React.SetStateAction<string>>
   search: string
-  loader: boolean
+
   setDisplayScreen: React.Dispatch<React.SetStateAction<"loading" | "start" | "home">>
   displayScreen: "loading" | "start" | "home"
   setClickedOnSearchButton: React.Dispatch<React.SetStateAction<boolean>>
@@ -33,7 +34,7 @@ export const mainContext = createContext<MainProviderProps | undefined>(undefine
 export default function MainProvider({ children }: { children: React.ReactNode }) {
   const [states, dispatch] = useReducer(reducer, initialState)
   const [search, setSearch] = useState<string>("")
-  const [loader, setLoader] = useState<boolean>(true)
+
   const [displayScreen, setDisplayScreen] = useState<"loading" | "start" | "home">("loading")
   const [clickedOnSearchButton, setClickedOnSearchButton] = useState<boolean>(false)
 
@@ -164,11 +165,11 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       setDisplayScreen,
       fetchMovieVideos,
       search,
-      loader,
       displayScreen,
+      setClickedOnSearchButton,
       clickedOnSearchButton,
     }),
-    [states, search, loader, displayScreen]
+    [states, search, displayScreen]
   )
 
   return <mainContext.Provider value={value}>{children}</mainContext.Provider>

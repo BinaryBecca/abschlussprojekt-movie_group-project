@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router"
+import { NavLink } from "react-router"
 
 interface NavButtonProps {
   link: string
