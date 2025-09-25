@@ -1,34 +1,34 @@
 @font-face {
-  font-family: "Raleway-Variable";
-  src: url("/public/fonts/Raleway-VariableFont_wght.ttf");
+  font-family: 'Raleway-Variable';
+  src: url('/public/fonts/Raleway-VariableFont_wght.ttf');
 }
 
 @font-face {
-  font-family: "Raleway-Italic-Variable";
-  src: url("/public/fonts/Raleway-Italic-VariableFont_wght.ttf");
+  font-family: 'Raleway-Italic-Variable';
+  src: url('/public/fonts/Raleway-Italic-VariableFont_wght.ttf');
 }
 
 @font-face {
-  font-family: "Amiko-Regular";
-  src: url("/public/fonts/Amiko-Regular.ttf");
+  font-family: 'Amiko-Regular';
+  src: url('/public/fonts/Amiko-Regular.ttf');
 }
 
 @font-face {
-  font-family: "Amiko-Bold";
-  src: url("/public//fonts/Amiko-Bold.ttf");
+  font-family: 'Amiko-Bold';
+  src: url('/public//fonts/Amiko-Bold.ttf');
 }
 
 @font-face {
-  font-family: "Nunito-Variable";
-  src: url("/public/fonts/Raleway-Italic-VariableFont_wght.ttf");
+  font-family: 'Nunito-Variable';
+  src: url('/public/fonts/Raleway-Italic-VariableFont_wght.ttf');
 }
 
 @font-face {
-  font-family: "Nunito-Italic-Variable";
-  src: url("/public/fonts/NunitoSans-Italic-VariableFont.ttf");
+  font-family: 'Nunito-Italic-Variable';
+  src: url('/public/fonts/NunitoSans-Italic-VariableFont.ttf');
 }
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-green: #4da895;
@@ -38,9 +38,9 @@
   --color-mediumgrey: #a1b9b5;
   --color-lightgrey: #e7efed;
 
-  --font-base: "Amiko-Regular", sans-serif;
-  --font-healdine: "Raleway-Variable", sans-serif;
-  --font-button: "Nunito-Variable", sans-serif;
+  --font-base: 'Amiko-Regular', sans-serif;
+  --font-healdine: 'Raleway-Variable', sans-serif;
+  --font-button: 'Nunito-Variable', sans-serif;
 }
 
 @layer base {
@@ -87,13 +87,15 @@
 }
 .loading:before,
 .loading:after {
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 50%;
   animation: pulsOut 1.8s ease-in-out infinite;
   filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75));
 }
 .loading:before {
+  position: absolute;
+  content: '';
   width: 100%;
   padding-bottom: 100%;
   box-shadow: inset 0 0 0 1rem #fff;
