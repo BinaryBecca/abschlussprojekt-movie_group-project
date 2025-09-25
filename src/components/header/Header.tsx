@@ -1,5 +1,5 @@
-import SearchBar from '../searchBar/SearchBar'
-import GenreBar from '../genreBar/GenreBar'
+import SearchBar from "../searchBar/SearchBar"
+import GenreBar from "../genreBar/GenreBar"
 
 export default function Header() {
   return (

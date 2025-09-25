@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import useMovies from '../../functions/Functions'
-import MovieButton from '../movieButton/MovieButton'
-import { Carousel } from 'react-bootstrap'
-import type { Genre } from '../../interfaces/IGenres'
+import { useEffect, useState } from "react"
+import useMovies from "../../functions/Functions"
+import MovieButton from "../movieButton/MovieButton"
+import { Carousel } from "react-bootstrap"
+import type { Genre } from "../../interfaces/IGenres"
 
 export default function GenreBar() {
   const { genres, fetchGenreNavBar, fetchGenreByTrend, loading } = useMovies()
@@ -41,8 +41,7 @@ export default function GenreBar() {
           >
             ›
           </span>
-        }
-      >
+        }>
         {splittedGenres.map((group, index) => (
           <Carousel.Item key={index}>
             <div className="d-flex justify-content-center gap-2 py-2">
