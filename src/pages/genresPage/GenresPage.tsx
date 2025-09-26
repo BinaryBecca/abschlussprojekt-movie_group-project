@@ -7,9 +7,19 @@ import SearchResults from "../../components/searchResults/SearchResults"
 
 export default function GenresPage() {
   const { genreId } = useParams<{ genreId: string }>()
-  const { fetchMoviesByGenre, trending, searchResults, clickedOnSearchButton, loading, error, genres } = useMovies()
+  const {
+    fetchMoviesByGenre,
+    trending,
+    searchResults,
+    clickedOnSearchButton,
+    setClickedOnSearchButton,
+    loading,
+    error,
+    genres,
+  } = useMovies()
 
   useEffect(() => {
+    setClickedOnSearchButton(false)
     if (genreId) void fetchMoviesByGenre(Number(genreId), 1)
   }, [genreId])
 
