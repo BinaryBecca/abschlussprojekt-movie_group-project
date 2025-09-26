@@ -10,7 +10,7 @@ export default function HomePage() {
   useEffect(() => {
     setClickedOnSearchButton(false)
     fetchTrendingMovies()
-  }, [])
+  }, [setClickedOnSearchButton])
 
   return (
     <>
