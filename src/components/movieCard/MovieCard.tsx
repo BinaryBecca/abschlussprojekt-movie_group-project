@@ -13,8 +13,9 @@ export default function MovieCard({ movie }: MovieCardProps) {
 
   const { favorites, setFavorites } = useMovies()
 
-  const isFavoriteClicked = favorites
-  console.log("favorites", favorites)
+  // prüfen, ob Film schon in FavoritePage
+  // console.log("favorites", favorites)
+  const isFavoriteClicked = favorites.find((favorite) => movie.id === favorite.id)
 
   return (
     <section className="mb-4">
@@ -27,14 +28,12 @@ export default function MovieCard({ movie }: MovieCardProps) {
           <div className="flex flex-row justify-between items-baseline">
             <h3 className="!text-[1.2rem] font-bold ">{movie.title}</h3>
             <button onClick={() => setFavorites(movie)}>
-              <img
-                src={isFavoriteClicked ? "/img/icon_favorites_active.svg" : "/img/icon_favorites.svg"}
-                alt="favorite-icon"
-                className="h-6"
-              />
+              {isFavoriteClicked ? (
+                <img src="/img/icon_favorites_active.svg" alt="icon_favorites_active" className="h-8" />
+              ) : (
+                <img src="/img/icon_favorites.svg" alt="icon_favorites" className="h-6" />
+              )}
             </button>
-            {/* /img/icon_favorites.svg */}
-            {/* /img/icon_favorites_active.svg */}
           </div>
 
           <div className="flex flex-row justify-start  items-center gap-2 font-light text-[0.8rem]">

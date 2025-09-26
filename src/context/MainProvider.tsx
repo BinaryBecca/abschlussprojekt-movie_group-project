@@ -172,6 +172,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
   }
 
   // ? Set favorites
+  // Favoriten laden
   useEffect(() => {
     try {
       const raw = localStorage.getItem("favorites")
@@ -188,23 +189,26 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     }
   }, [])
 
+  // ? Favorite function
   function setFavorites(favorite: IMovieDetails) {
-    const favorites = [...states.favorites]
+    // console.log("states.favorites", states.favorites)
+    const favoritesArrayCopy = [...states.favorites]
 
-    const alreadyMarkedAsFavorite = favorites.find((film) => film.id === favorite.id)
+    const alreadyMarkedAsFavorite = favoritesArrayCopy.find((movie) => movie.id === favorite.id)
 
     let newFavorites
 
+    // Film noch nicht da => hinzufügen
     if (!alreadyMarkedAsFavorite) {
-      favorites.push(favorite)
-      newFavorites = favorites
+      favoritesArrayCopy.push(favorite)
+      newFavorites = favoritesArrayCopy
     } else {
-      // falls Film da => nicht doppelt anzeigen
-      newFavorites = favorites.filter((movie) => movie.id !== favorite.id)
+      // Film da => entfernen
+      newFavorites = favoritesArrayCopy.filter((movie) => movie.id !== favorite.id)
     }
-
+    // favorites in localStorage speichern
     localStorage.setItem("favorites", JSON.stringify(newFavorites))
-    dispatch({ type: "SET_FAVORITES", payload: [] })
+    dispatch({ type: "SET_FAVORITES", payload: newFavorites })
   }
 
   // ? Startscreen Loading Simluation
