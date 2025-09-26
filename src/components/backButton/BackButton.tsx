@@ -1,7 +1,7 @@
 // src/components/navigation/BackButton.tsx
-import { useCallback } from 'react'
-import { useLocation, useNavigate } from 'react-router'
-import useMovies from '../../functions/Functions'
+import { useCallback } from "react"
+import { useLocation, useNavigate } from "react-router"
+import useMovies from "../../functions/Functions"
 
 type BackButtonProps = {
   // * Route
@@ -18,9 +18,9 @@ type BackButtonProps = {
 
 export default function BackButton({
   to,
-  label = 'Back',
-  iconSrc = '/img/icon_arrow.svg',
-  className = 'py-1 flex items-center gap-2 !no-underline mb-3',
+  label = "Back",
+  iconSrc = "/img/icon_arrow.svg",
+  className = "py-1 flex items-center gap-2 !no-underline mb-3",
   resetSearch = false,
 }: BackButtonProps) {
   const navigate = useNavigate()
@@ -30,32 +30,23 @@ export default function BackButton({
   const handleClick = useCallback(() => {
     if (resetSearch) {
       setClickedOnSearchButton(false)
-      setQuery?.('')
+      setQuery?.("")
     }
     if (to) {
       navigate(to)
       return
     }
     // Wenn wir nicht auf "/" sind normal zurück navigieren
-    if (location.pathname !== '/') {
+    if (location.pathname !== "/") {
       navigate(-1)
       return
     }
-  }, [
-    resetSearch,
-    to,
-    navigate,
-    location.pathname,
-    setClickedOnSearchButton,
-    setQuery,
-  ])
+  }, [resetSearch, to, navigate, location.pathname, setClickedOnSearchButton, setQuery])
 
   return (
     <button type="button" onClick={handleClick} className={className}>
       <img src={iconSrc} alt="Icon Arrow" className="w-4  " />
-      <p className="text-green size-1 text-[1.1rem] hover:text-lightgreen flex ">
-        {label}
-      </p>
+      <p className="text-green size-1 text-[1.1rem] hover:text-lightgreen flex ">{label}</p>
     </button>
   )
 }

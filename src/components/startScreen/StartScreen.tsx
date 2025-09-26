@@ -10,7 +10,7 @@ export default function StartScreen({ onClick }: StartScreenProps) {
       <div className="bg-darkblue flex flex-column  gap-4 justify-items-start items-center h-screen">
         <div className="w-full h-[65vh] relative mb-5">
           <img
-            src="/public/img/startscreen_illu_02.jpg"
+            src="/img/startscreen_illu_02.jpg"
             alt="Movie Illustration"
             className="absolute inset-0 w-full h-full object-cover"
           />

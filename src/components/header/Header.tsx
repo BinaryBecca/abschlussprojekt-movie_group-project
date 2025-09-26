@@ -12,7 +12,7 @@ export default function Header({ hideControls }: HeaderProps) {
       <header>
         <section className="p-4" id="start">
           <Link to="/">
-            <img src="../../../public/img/logo_mov.svg" alt=".mov Logo" className="w-12 m-auto" />
+            <img src="/img/logo_mov.svg" alt=".mov Logo" className="w-12 m-auto" />
           </Link>
         </section>
         {/* SearchBar und GenreBar werden nur angezeigt wenn erlaubt */}
