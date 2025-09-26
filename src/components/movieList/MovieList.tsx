@@ -3,15 +3,18 @@ import MovieCard from "../movieCard/MovieCard"
 
 interface MovieListProps {
   movies: IMovieDetails[]
+  title?: string
 }
 
-export default function MovieList({ movies }: MovieListProps) {
+export default function MovieList({ movies, title = "Movies" }: MovieListProps) {
   return (
     <>
       <section>
-        <div className="mb-4">
-          <h1>Trending Movies</h1>
-        </div>
+        {title && (
+          <div className="mb-4">
+            <h1>{title}</h1>
+          </div>
+        )}
         <ul className="list-none p-0">
           {movies.map((movie) => {
             return (
