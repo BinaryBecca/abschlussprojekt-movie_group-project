@@ -16,19 +16,17 @@ export default function TrendingMoviesPage() {
     async function loadDetails() {
       const show50Movies: Result[] = trending.slice(0, 50)
 
-      // Nur Filme mit einer ID durchlassen
       const withId = show50Movies.filter((m): m is Result & { id: number } => typeof m.id === "number")
 
-      // Jetzt liefert Promise.all -> IMovieDetails[]
       const showMoreMovies = await Promise.all(withId.map((m) => fetchDetailedMovie(m.id)))
 
-      setMoreMovies(showMoreMovies) // <-- passt jetzt zum State-Typ
+      const notUndefinedMovies = showMoreMovies.filter((m): m is IMovieDetails => m !== undefined)
+
+      setMoreMovies(notUndefinedMovies)
     }
 
-    if (trending.length > 0) {
-      void loadDetails()
-    }
-  }, [trending, fetchDetailedMovie])
+    loadDetails()
+  }, [trending])
 
   return (
     <section className="px-6 ">
