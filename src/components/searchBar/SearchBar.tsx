@@ -1,4 +1,4 @@
-import useMovies from "../../functions/Functions"
+import useMovies from '../../functions/Functions'
 
 export default function SearchBar() {
   const { searchMovieByName, query, setQuery } = useMovies()
@@ -13,8 +13,7 @@ export default function SearchBar() {
       )
     }
     searchMovieByName(q)
-    setQuery("")
-    console.log(q)
+    setQuery('')
   }
 
   return (
@@ -30,7 +29,8 @@ export default function SearchBar() {
         <button
           type="button"
           onClick={handleSearch}
-          className=" hover:text-darkblue absolute right-10 top-0 bottom-8 inset-y-1/2 translate-y-1/2 z-10">
+          className=" hover:text-darkblue absolute right-10 top-0 bottom-8 inset-y-1/2 translate-y-1/2 z-10"
+        >
           <img src="/img/icon_search.svg" alt="" className="w-8 m-auto" />
         </button>
       </div>
