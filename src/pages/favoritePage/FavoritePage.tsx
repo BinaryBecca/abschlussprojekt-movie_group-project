@@ -1,6 +1,10 @@
 import { Link } from "react-router"
+import useMovies from "../../functions/Functions"
+import MovieCard from "../../components/movieCard/MovieCard"
 
 export default function FavoritePage() {
+  const { favorites } = useMovies()
+
   return (
     <div className="h-screen p-6">
       <div className="mb-4">
@@ -10,7 +14,15 @@ export default function FavoritePage() {
         </Link>
       </div>
       <h1>My Favorites </h1>
-      <p>No movies listed.</p>
+      {favorites.length === 0 ? (
+        <p>No favorites listed.</p>
+      ) : (
+        <div>
+          {favorites.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

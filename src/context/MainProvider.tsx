@@ -27,6 +27,7 @@ export interface MainProviderProps extends IState {
   displayScreen: "loading" | "start" | "home"
   setClickedOnSearchButton: React.Dispatch<React.SetStateAction<boolean>>
   clickedOnSearchButton: boolean
+  setFavorites: (movie: IMovieDetails) => void
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -170,6 +171,27 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     }
   }
 
+  // ? Set favorites
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("favorites")
+      if (raw) {
+        const parsed = JSON.parse(raw) as IMovieDetails[]
+        dispatch({ type: "SET_FAVORITES", payload: parsed })
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: error.message ?? "Fehler bei der Suchanfrage.",
+      })
+    }
+  }, [])
+
+  function setFavorites(favorite: IMovieDetails) {
+    dispatch({ type: "SET_FAVORITES", payload: [] })
+  }
+
   // ? Startscreen Loading Simluation
   useEffect(() => {
     if (displayScreen === "loading") {
@@ -199,6 +221,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       displayScreen,
       setClickedOnSearchButton,
       clickedOnSearchButton,
+      setFavorites,
     }),
     [states, search, displayScreen, clickedOnSearchButton]
   )
