@@ -1,9 +1,8 @@
-import type { IMovieDetails } from '../../interfaces/IMovieDetails'
-import type { Result } from '../../interfaces/ITrendingMovies'
-import MovieCard from '../movieCard/MovieCard'
+import type { IMovieDetails } from "../../interfaces/IMovieDetails"
+import MovieCard from "../movieCard/MovieCard"
 
 interface SearchResultsProps {
-  results: (Result | IMovieDetails)[]
+  results: IMovieDetails[]
 }
 
 export default function SearchResults({ results }: SearchResultsProps) {
