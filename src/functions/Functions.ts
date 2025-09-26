@@ -36,6 +36,8 @@ export const reducer = (state: IState, action: TAction): IState => {
       return { ...state, query: action.payload }
     case "SET_FAVORITES":
       return { ...state, favorites: action.payload }
+    case "SET_DOWNLOADS":
+      return { ...state, downloads: action.payload }
     // case "FETCH_DETAILS":
     //   return { ...state, loading: false, details: action.payloud }
     default:
@@ -53,5 +55,6 @@ export const initialState: IState = {
   searchResults: [],
   videos: [],
   favorites: [],
+  downloads: [],
   // details: []
 }

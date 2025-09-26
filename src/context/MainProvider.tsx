@@ -28,6 +28,7 @@ export interface MainProviderProps extends IState {
   setClickedOnSearchButton: React.Dispatch<React.SetStateAction<boolean>>
   clickedOnSearchButton: boolean
   setFavorites: (movie: IMovieDetails) => void
+  setDownloads: (movie: IMovieDetails) => void
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -211,6 +212,43 @@ export default function MainProvider({ children }: { children: React.ReactNode }
     dispatch({ type: "SET_FAVORITES", payload: newFavorites })
   }
 
+  // ? Set downloads
+  // Downloads laden
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("downloads")
+      if (raw) {
+        const parsed = JSON.parse(raw) as IMovieDetails[]
+        dispatch({ type: "SET_DOWNLOADS", payload: parsed })
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      dispatch({
+        type: "FETCH_ERROR",
+        payload: error.message ?? "Fehler bei der Suchanfrage.",
+      })
+    }
+  }, [])
+
+  // ? Download function
+  function setDownloads(download: IMovieDetails) {
+    const downloadsArrayCopy = [...states.downloads]
+
+    const alreadyMarkedAsownloaded = downloadsArrayCopy.find((movie) => movie.id === download.id)
+
+    let newDownloads
+
+    if (!alreadyMarkedAsownloaded) {
+      downloadsArrayCopy.push(download)
+      newDownloads = downloadsArrayCopy
+    } else {
+      newDownloads = downloadsArrayCopy.filter((movie) => movie.id !== download.id)
+    }
+
+    localStorage.setItem("downloads", JSON.stringify(newDownloads))
+    dispatch({ type: "SET_DOWNLOADS", payload: newDownloads })
+  }
+
   // ? Startscreen Loading Simluation
   useEffect(() => {
     if (displayScreen === "loading") {
@@ -241,6 +279,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
       setClickedOnSearchButton,
       clickedOnSearchButton,
       setFavorites,
+      setDownloads,
     }),
     [states, search, displayScreen, clickedOnSearchButton]
   )

@@ -14,6 +14,7 @@ export interface IState {
   query: string
   searchResults: IMovieDetails[]
   favorites: IMovieDetails[]
+  downloads: IMovieDetails[]
   // details: IDetails[]
 }
 
@@ -28,5 +29,6 @@ export type TAction =
   | { type: "FETCH_SEARCHRESULTS"; payload: IMovieDetails[] }
   | { type: "FETCH_QUERY"; payload: string }
   | { type: "SET_FAVORITES"; payload: IMovieDetails[] }
+  | { type: "SET_DOWNLOADS"; payload: IMovieDetails[] }
 
 // | { type: "FETCH_DETAILS"; payload: IDetails[] }
