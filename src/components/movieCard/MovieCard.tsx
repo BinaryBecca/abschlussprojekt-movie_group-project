@@ -14,6 +14,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
   const { favorites, setFavorites } = useMovies()
 
   const isFavoriteClicked = favorites
+  console.log("favorites", favorites)
 
   return (
     <section className="mb-4">

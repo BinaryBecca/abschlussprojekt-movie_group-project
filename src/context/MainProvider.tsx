@@ -189,6 +189,21 @@ export default function MainProvider({ children }: { children: React.ReactNode }
   }, [])
 
   function setFavorites(favorite: IMovieDetails) {
+    const favorites = [...states.favorites]
+
+    const alreadyMarkedAsFavorite = favorites.find((film) => film.id === favorite.id)
+
+    let newFavorites
+
+    if (!alreadyMarkedAsFavorite) {
+      favorites.push(favorite)
+      newFavorites = favorites
+    } else {
+      // falls Film da => nicht doppelt anzeigen
+      newFavorites = favorites.filter((movie) => movie.id !== favorite.id)
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(newFavorites))
     dispatch({ type: "SET_FAVORITES", payload: [] })
   }
 
