@@ -17,7 +17,7 @@ export default function MovieCard({ movie }: MovieCarouselCardProps) {
           <PosterImage
             posterPath={movie.poster_path}
             title={movie.title}
-            className="rounded-[0.6rem] h-auto max-h-[10rem]"
+            className="rounded-[0.6rem] h-auto max-h-[10rem] max-w-[4.8rem]"
           />
         </Link>
 
