@@ -4,6 +4,7 @@ import useMovies from '../../functions/Functions'
 import TrailerModal from '../../components/trailer/TrailerModal'
 import MovieButton from '../../components/movieButton/MovieButton'
 import BackButton from '../../components/backButton/BackButton'
+import PosterImage from '../../components/posterImage/PosterImage'
 
 export default function DetailsPage() {
   const { id } = useParams<{ id: string }>()
@@ -53,13 +54,9 @@ export default function DetailsPage() {
       <div className="mx-auto w-full max-w-md px-5 flex flex-col gap-4">
         <BackButton />
         {/* Poster-Card */}
-        <img
-          src={
-            details.poster_path
-              ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
-              : '/img/placeholder.jpg'
-          }
-          alt={details.title}
+        <PosterImage
+          posterPath={details.poster_path}
+          title={details.title}
           className="rounded-2xl"
         />
         {/* Title */}

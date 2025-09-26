@@ -1,5 +1,3 @@
-// src/components/trailer/TrailerModal.tsx
-
 type TrailerModalProps = {
   open: boolean // steuert Sichtbarkeit (showTrailer)
   embedUrl: string | null // fertige YouTube-Embed-URL
