@@ -1,19 +1,17 @@
-import type { IMovieDetails } from '../../interfaces/IMovieDetails'
-import MovieCard from '../movieCard/MovieCard'
-import BackButton from '../backButton/BackButton'
+import type { IMovieDetails } from "../../interfaces/IMovieDetails"
+import MovieCard from "../movieCard/MovieCard"
+import BackButton from "../backButton/BackButton"
 
 interface MovieListProps {
   movies: IMovieDetails[]
   title?: string
+  showBackButtoon?: boolean
 }
 
-export default function MovieList({
-  movies,
-  title = 'Movies',
-}: MovieListProps) {
+export default function MovieList({ movies, title = "Movies" }: MovieListProps) {
   // ? Crash vermeiden wenn movies nicht gesetzt ist
   const safeMovies = Array.isArray(movies)
-    ? movies.filter((m): m is IMovieDetails => !!m && typeof m.id === 'number')
+    ? movies.filter((m): m is IMovieDetails => !!m && typeof m.id === "number")
     : []
 
   return (
