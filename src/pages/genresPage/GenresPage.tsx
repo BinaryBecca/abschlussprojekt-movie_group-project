@@ -1,9 +1,8 @@
-// src/pages/genresPage/GenresPage.tsx
-import { useEffect } from "react"
-import { useParams } from "react-router"
-import useMovies from "../../functions/Functions"
-import MovieList from "../../components/movieList/MovieList"
-import SearchResults from "../../components/searchResults/SearchResults"
+import { useEffect } from 'react'
+import { useParams } from 'react-router'
+import useMovies from '../../functions/Functions'
+import MovieList from '../../components/movieList/MovieList'
+import SearchResults from '../../components/searchResults/SearchResults'
 
 export default function GenresPage() {
   const { genreId } = useParams<{ genreId: string }>()
@@ -23,7 +22,8 @@ export default function GenresPage() {
     if (genreId) void fetchMoviesByGenre(Number(genreId), 1)
   }, [genreId])
 
-  const genreName = genres.find((g) => g.id === Number(genreId))?.name ?? "Unknown"
+  const genreName =
+    genres.find((g) => g.id === Number(genreId))?.name ?? 'Unknown'
 
   if (loading && trending.length === 0) return <div>Lade Kategorie…</div>
   if (error) return <div className="text-red-600">{error}</div>

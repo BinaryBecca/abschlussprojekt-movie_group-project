@@ -1,6 +1,5 @@
 import { Link } from 'react-router'
 import type { IMovieDetails } from '../../interfaces/IMovieDetails'
-import NavButton from '../navButton/NavButton'
 import PosterImage from '../posterImage/PosterImage'
 import useMovies from '../../functions/Functions'
 
