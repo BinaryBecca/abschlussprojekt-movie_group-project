@@ -1,23 +1,35 @@
-import { Link } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import useMovies from "../../functions/Functions"
 import MovieCard from "../../components/movieCard/MovieCard"
+import { useEffect } from "react"
+import SearchResults from "../../components/searchResults/SearchResults"
 
 export default function FavoritePage() {
-  const { downloads } = useMovies()
+  const { downloads, searchResults, clickedOnSearchButton, setClickedOnSearchButton } = useMovies()
+
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((location.state as any)?.resetSearch) {
+      setClickedOnSearchButton(false)
+      navigate(".", { replace: true, state: {} })
+    }
+  }, [location.state, navigate, setClickedOnSearchButton])
 
   return (
     <div className="h-screen p-6">
-      <div className="mb-4">
-        <Link to={`/`} className=" py-1 flex items-center gap-2 !no-underline">
-          <img src="/img/icon_arrow.svg" alt="Icon Arrow" className="w-5" />{" "}
-          <p className="text-green size-2 text-[1.1rem] hover:text-lightgreen ">Back</p>
-        </Link>
-      </div>
-      <h1>My Downloads </h1>
-      {downloads.length === 0 ? (
-        <p>No downloads listed.</p>
+      {clickedOnSearchButton ? (
+        <SearchResults results={searchResults} />
+      ) : downloads.length === 0 ? (
+        <div>
+          <h1>My Downloads</h1>
+          <div>No Downloads listed.</div>
+        </div>
       ) : (
         <div>
+          <h1>My Downloads</h1>
           {downloads.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
