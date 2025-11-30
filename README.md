@@ -5,9 +5,9 @@ Deine Movie-Discovery-App für entspannte Filmabende – entdecke Trends, durchs
 ![Mov. Titel](/docs/mov_titel.png)
 
 <div align="center">
-  <img src="/docs/mov_app_loader_animation.gif" alt="Mov. Loader" width="280"/>
-  <img src="/docs/mov_app_mobile_welcome.png" alt="Mov. Welcome" width="280"/>
-  <img src="/docs/mov_app_mobile_start.png" alt="Mov. Start" width="280"/>
+  <img src="/docs/mov_app_loader_animation.gif" alt="Mov. Loader" width="240"/>
+  <img src="/docs/mov_app_mobile_welcome.png" alt="Mov. Welcome" width="240"/>
+  <img src="/docs/mov_app_mobile_start.png" alt="Mov. Start" width="240"/>
 </div>
 
 #### 🔗 [ Mov. App Live Demo](https://moviedbsession2.netlify.app/)
@@ -86,9 +86,9 @@ Für unser Abschlussprojekt im Modul 03 haben wir im Team mit React, TypeScript 
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="/docs/mov_app_mobile_filter.png" alt="Mov. Loader" width="280"/>
-  <img src="/docs/mov_app_mobile_scroll.png" alt="Mov. Welcome" width="280"/>
-  <img src="/docs/mov_app_mobile_detail.png" alt="Mov. Start" width="280"/>
+  <img src="/docs/mov_app_mobile_filter.png" alt="Mov. Loader" width="240"/>
+  <img src="/docs/mov_app_mobile_scroll.png" alt="Mov. Welcome" width="240"/>
+  <img src="/docs/mov_app_mobile_detail.png" alt="Mov. Start" width="240"/>
 </div>
 
 ---
